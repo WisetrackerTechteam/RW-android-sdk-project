@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    tools:context=".MainActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/dot_click"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="CLICK"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/dot_conversion"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dot_conversion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="CONVERSION"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toRightOf="@id/dot_click"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dot_purchase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="PURCHASE"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/dot_page"
+            app:layout_constraintTop_toBottomOf="@id/dot_click" />
+
+        <TextView
+            android:id="@+id/dot_page"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="PAGE"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toRightOf="@id/dot_purchase"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dot_click" />
+
+        <TextView
+            android:id="@+id/dox_conversion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="X_CONVERSION"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/dox_revenue"
+            app:layout_constraintTop_toBottomOf="@id/dot_purchase" />
+
+        <TextView
+            android:id="@+id/dox_revenue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="X_REVENUE"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toRightOf="@id/dox_conversion"
+            app:layout_constraintRight_toLeftOf="@id/dox_event"
+            app:layout_constraintTop_toBottomOf="@id/dot_purchase" />
+
+        <TextView
+            android:id="@+id/dox_event"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="X_EVENT"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toRightOf="@id/dox_revenue"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dot_purchase" />
+
+        <TextView
+            android:id="@+id/dox_user_identify"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="X_USER_IDENTIFY"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/dox_group_identify"
+            app:layout_constraintTop_toBottomOf="@id/dox_conversion" />
+
+        <TextView
+            android:id="@+id/dox_group_identify"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rect_drawable"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="X_GROUP_IDENTIFY"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@id/dox_user_identify"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dox_conversion" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

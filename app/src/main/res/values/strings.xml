@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">app</string>
+    <string-array name="dotAuthorizationKey">
+        <item name="usdMode">1</item>
+        <item name="domain">http://collector.naver.wisetracker.co.kr/collector/</item>
+        <!--<item name="domain">http://125.209.214.9/collector/</item> release domain -->
+        <item name="serviceNumber">103</item>
+        <item name="expireDate">14</item>
+        <item name="isDebug">true</item>
+        <item name="isInstallRetention">true</item>
+        <item name="isFingerPrint">true</item>
+        <item name="accessToken">sdflkjwoijfoaiejfoawiejfowaijfwoijefoiwj</item>
+        <item name="domain_x">http://report.wisetracker.co.kr/</item>
+    </string-array>
+    <string-array name="customKeyList">
+        <item name="change_1">advtId#advt_id</item>
+    </string-array>
+</resources>
