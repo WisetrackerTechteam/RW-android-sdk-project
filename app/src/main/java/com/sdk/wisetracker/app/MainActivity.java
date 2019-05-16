@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sdk.wisetracker.dot.open.api.DOT;
 import com.sdk.wisetracker.dot.open.model.Click;
@@ -33,35 +34,41 @@ public class MainActivity extends AppCompatActivity {
         DOT.initialization(this);
 
         TextView click = findViewById(R.id.dot_click);
-        click.setOnClickListener(v ->
-                DOT.setClick(new Click.Builder()
-                        .setClickData("click data")
-                        .setClickEvent("click event")
-                        .setClickType("type")
-                        .build()));
+        click.setOnClickListener(v -> {
+            DOT.setClick(new Click.Builder()
+                    .setClickData("click data")
+                    .setClickEvent("click event")
+                    .setClickType("type")
+                    .build());
+            Toast.makeText(this, "Click 발생", Toast.LENGTH_SHORT).show();
+        });
 
         TextView conversion = findViewById(R.id.dot_conversion);
-        conversion.setOnClickListener(v ->
-                DOT.setConversion(new Conversion.Builder()
-                        .setKeyword("conversion keyword")
-                        .setProduct(new Product.Builder()
-                                .setAttr1("attr1")
-                                .setAttr2("attr2")
-                                .setAttr3("attr3")
-                                .setOptionalAmount1(11d)
-                                .setOptionalAmount2(12d)
-                                .build())
-                        .build()));
+        conversion.setOnClickListener(v -> {
+            DOT.setConversion(new Conversion.Builder()
+                    .setKeyword("conversion keyword")
+                    .setProduct(new Product.Builder()
+                            .setAttr1("attr1")
+                            .setAttr2("attr2")
+                            .setAttr3("attr3")
+                            .setOptionalAmount1(11d)
+                            .setOptionalAmount2(12d)
+                            .build())
+                    .build());
+            Toast.makeText(this, "Conversion 발생", Toast.LENGTH_SHORT).show();
+        });
 
         TextView purchase = findViewById(R.id.dot_purchase);
-        purchase.setOnClickListener(v ->
-                DOT.setPurchase(new Purchase.Builder()
-                        .setProduct(new Product.Builder()
-                                .setProductCode("product code")
-                                .setOptionalAmount1(1d)
-                                .setOptionalAmount2(2d)
-                                .build())
-                        .build()));
+        purchase.setOnClickListener(v -> {
+            DOT.setPurchase(new Purchase.Builder()
+                    .setProduct(new Product.Builder()
+                            .setProductCode("product code")
+                            .setOptionalAmount1(1d)
+                            .setOptionalAmount2(2d)
+                            .build())
+                    .build());
+            Toast.makeText(this, "Purchase 발생", Toast.LENGTH_SHORT).show();
+        });
 
         TextView page = findViewById(R.id.dot_page);
         page.setOnClickListener(v -> {
@@ -93,69 +100,78 @@ public class MainActivity extends AppCompatActivity {
                                             .build())
                             .build());
 
+            Toast.makeText(this, "X_Conversion 발생", Toast.LENGTH_SHORT).show();
+
         });
 
         TextView xRevenue = findViewById(R.id.dox_revenue);
-        xRevenue.setOnClickListener(v ->
-                DOX.logRevenue(new XRevenue.Builder()
-                        .setRevenueType("revenue")
-                        .setCurrency("krw")
-                        .setOrderNo("ordno")
-                        .setProduct(new XProduct.Builder()
-                                .setProductCode("prc code")
-                                .setProductOrderNo("prc ord no")
-                                .setDetailCategory("detail")
-                                .setProperties(new XProperties.Builder()
-                                        .set("pr1", "pr1")
-                                        .set("pr2", new XProperties.Builder()
-                                                .set("pr2 deptch", "1")
-                                                .build())
-                                        .build())
-                                .build())
-                        .setProperties(new XProperties.Builder()
-                                .set("revenue", "1")
-                                .set("revenue2", new XProperties.Builder()
-                                        .set("key1", "key1")
-                                        .build())
-                                .build())
-                        .build()
-                ));
+        xRevenue.setOnClickListener(v -> {
+            DOX.logRevenue(new XRevenue.Builder()
+                    .setRevenueType("revenue")
+                    .setCurrency("krw")
+                    .setOrderNo("ordno")
+                    .setProduct(new XProduct.Builder()
+                            .setProductCode("prc code")
+                            .setProductOrderNo("prc ord no")
+                            .setDetailCategory("detail")
+                            .setProperties(new XProperties.Builder()
+                                    .set("pr1", "pr1")
+                                    .set("pr2", new XProperties.Builder()
+                                            .set("pr2 deptch", "1")
+                                            .build())
+                                    .build())
+                            .build())
+                    .setProperties(new XProperties.Builder()
+                            .set("revenue", "1")
+                            .set("revenue2", new XProperties.Builder()
+                                    .set("key1", "key1")
+                                    .build())
+                            .build())
+                    .build());
+            Toast.makeText(this, "X_Revenue 발생", Toast.LENGTH_SHORT).show();
+        });
 
         TextView xEvent = findViewById(R.id.dox_event);
-        xEvent.setOnClickListener(v ->
-                DOX.logEvent(new XEvent.Builder()
-                        .setEventName("log event")
-                        .setProperties(new XProperties.Builder()
-                                .set("put1", "put value")
-                                .build())
-                        .build()));
+        xEvent.setOnClickListener(v -> {
+            DOX.logEvent(new XEvent.Builder()
+                    .setEventName("log event")
+                    .setProperties(new XProperties.Builder()
+                            .set("put1", "put value")
+                            .build())
+                    .build());
+            Toast.makeText(this, "X_Event 발생", Toast.LENGTH_SHORT).show();
+        });
 
         TextView xUserIdentify = findViewById(R.id.dox_user_identify);
-        xUserIdentify.setOnClickListener(v ->
-                DOX.userIdentify(new XIdentify.Builder()
-                        .set("set", "\"\n1\"")
-                        .set("set2", "2")
-                        .set("add2", new XProperties.Builder()
-                                .set("key1", "key1")
-                                .set("key2", new XProperties.Builder()
-                                        .set("key2", "key2")
-                                        .build())
-                                .build())
-                        .unset("unset")
-                        .unset("unset2")
-                        .add("add1", 1)
-                        .add("add2", 12)
-                        .add("add3", 123)
-                        .add("add4", 1234)
-                        .build()));
+        xUserIdentify.setOnClickListener(v -> {
+            DOX.userIdentify(new XIdentify.Builder()
+                    .set("set", "\"\n1\"")
+                    .set("set2", "2")
+                    .set("add2", new XProperties.Builder()
+                            .set("key1", "key1")
+                            .set("key2", new XProperties.Builder()
+                                    .set("key2", "key2")
+                                    .build())
+                            .build())
+                    .unset("unset")
+                    .unset("unset2")
+                    .add("add1", 1)
+                    .add("add2", 12)
+                    .add("add3", 123)
+                    .add("add4", 1234)
+                    .build());
+            Toast.makeText(this, "UserIdentify 발생", Toast.LENGTH_SHORT).show();
+        });
 
         TextView xGroupIdentify = findViewById(R.id.dox_group_identify);
-        xGroupIdentify.setOnClickListener(v ->
-                DOX.groupIdentify("group", "company", (new XIdentify.Builder()
-                        .set("group set", "1")
-                        .set("group set2", "2")
-                        .unset("group unset")
-                        .build())));
+        xGroupIdentify.setOnClickListener(v -> {
+            DOX.groupIdentify("group", "company", (new XIdentify.Builder()
+                    .set("group set", "1")
+                    .set("group set2", "2")
+                    .unset("group unset")
+                    .build()));
+            Toast.makeText(this, "GroupIdentify 발생", Toast.LENGTH_SHORT).show();
+        });
 
     }
 
