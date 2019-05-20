@@ -30,6 +30,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DOT.onStartPage(this);
+        DOT.setPage(new Page.Builder()
+                .setContentPath("main page")
+                .setCustomValue(new CustomValue.Builder()
+                        .setValue1("main page 1")
+                        .build())
+                .setIdentity("MAIN PAGE")
+                .setProduct(new Product.Builder()
+                        .setProductOrderNo("MAIN PRODUCT")
+                        .setProductCode("PRC 001")
+                        .setFirstCategory("category 1")
+                        .setSecondCategory("category category 1")
+                        .setDetailCategory("Sample 1")
+                        .build())
+                .build());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DOT.onStopPage(this);
+    }
+
+    private void setData() {
 
         DOT.initialization(this);
 
@@ -173,32 +203,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "GroupIdentify 발생", Toast.LENGTH_SHORT).show();
         });
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        DOT.onStartPage(this);
-        DOT.setPage(new Page.Builder()
-                .setContentPath("main page")
-                .setCustomValue(new CustomValue.Builder()
-                        .setValue1("main page 1")
-                        .build())
-                .setIdentity("MAIN PAGE")
-                .setProduct(new Product.Builder()
-                        .setProductOrderNo("MAIN PRODUCT")
-                        .setProductCode("PRC 001")
-                        .setFirstCategory("category 1")
-                        .setSecondCategory("category category 1")
-                        .setDetailCategory("Sample 1")
-                        .build())
-                .build());
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        DOT.onStopPage(this);
     }
 
 }
