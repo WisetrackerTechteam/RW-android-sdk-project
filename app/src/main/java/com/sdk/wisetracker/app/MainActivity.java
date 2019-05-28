@@ -65,11 +65,31 @@ public class MainActivity extends AppCompatActivity {
 
         TextView click = findViewById(R.id.dot_click);
         click.setOnClickListener(v -> {
-            DOT.setClick(new Click.Builder()
-                    .setClickData("click data")
-                    .setClickEvent("click event")
-                    .setClickType("type")
-                    .build());
+            if (v.getTag().toString() == "0") {
+                v.setTag("1");
+                DOT.setClick(new Click.Builder()
+                        .setClickData("click data")
+                        .setClickEvent("click event")
+                        .setClickType("type")
+                        .setCustomValue(new CustomValue.Builder()
+                                .setValue1("value1")
+                                .setValue2("value2")
+                                .build())
+                        .addCartProduct(new Product.Builder()
+                                .setDetailCategory("detail click")
+                                .setProductCode("click prc code")
+                                .build())
+                        .build());
+            } else {
+                v.setTag("0");
+                DOT.setClick(new Click.Builder()
+                        .setPushClickEvent("push click")
+                        .setCustomValue(new CustomValue.Builder()
+                                .setValue9("value1")
+                                .setValue10("value2")
+                                .build())
+                        .build());
+            }
             Toast.makeText(this, "Click 발생", Toast.LENGTH_SHORT).show();
         });
 
