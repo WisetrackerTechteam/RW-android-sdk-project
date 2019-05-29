@@ -3,15 +3,11 @@ package com.sdk.wisetracker.app;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
 import com.sdk.wisetracker.dot.open.api.DOT;
 import com.sdk.wisetracker.dot.open.model.CustomValue;
 import com.sdk.wisetracker.dot.open.model.Page;
 import com.sdk.wisetracker.dot.open.model.Product;
-import com.sdk.wisetracker.dox.open.api.DOX;
-import com.sdk.wisetracker.dox.open.model.XEvent;
-import com.sdk.wisetracker.dox.open.model.XProperties;
 
 public class SecondActivity extends AppCompatActivity {
 
