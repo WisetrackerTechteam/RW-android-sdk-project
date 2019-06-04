@@ -24,15 +24,16 @@ public class SecondActivity extends AppCompatActivity {
         DOT.setPage(new Page.Builder()
                 .setContentPath("second page")
                 .setCustomValue(new CustomValue.Builder()
-                        .setValue1("page 1")
+                        .setValue10("page 1")
                         .build())
                 .setIdentity("SECOND PAGE")
+                .setSearchResultCount(100)
                 .setProduct(new Product.Builder()
                         .setProductOrderNo("SECOND PRODUCT")
                         .setProductCode("PRC 002")
                         .setFirstCategory("category 2")
-                        .setSecondCategory("category category 2")
                         .setDetailCategory("Sample 2")
+                        .setAttr10("attr10")
                         .build())
                 .build());
     }

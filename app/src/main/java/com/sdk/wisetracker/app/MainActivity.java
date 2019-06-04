@@ -43,12 +43,14 @@ public class MainActivity extends AppCompatActivity {
                         .setValue1("main page 1")
                         .build())
                 .setIdentity("MAIN PAGE")
+                .setKeyword("main keyword")
                 .setProduct(new Product.Builder()
                         .setProductOrderNo("MAIN PRODUCT")
                         .setProductCode("PRC 001")
                         .setFirstCategory("category 1")
                         .setSecondCategory("category category 1")
                         .setDetailCategory("Sample 1")
+                        .setAttr1("1")
                         .build())
                 .build());
     }
