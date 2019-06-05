@@ -225,6 +225,12 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "GroupIdentify 발생", Toast.LENGTH_SHORT).show();
         });
 
+        TextView webView = findViewById(R.id.web_view);
+        webView.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+            startActivity(intent);
+        });
+
     }
 
 }
