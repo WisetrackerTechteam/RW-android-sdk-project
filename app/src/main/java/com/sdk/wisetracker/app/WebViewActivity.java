@@ -13,9 +13,6 @@ import android.webkit.WebViewClient;
 
 import com.sdk.wisetracker.dox.open.api.DOX;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 public class WebViewActivity extends AppCompatActivity {
 
     private final String TAG = "WebViewActivity";
@@ -41,14 +38,7 @@ public class WebViewActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 try {
-                    InputStreamReader inputReader = new InputStreamReader(getAssets().open("sample.js"));
-                    BufferedReader reader = new BufferedReader(inputReader);
-                    String line;
-                    String result = "";
-                    while ((line = reader.readLine()) != null) {
-                        result += line;
-                    }
-                    webView.loadUrl("javascript:" + "(" + result + ")" + "()");
+                    DOX.setDoxJavascript(view);
                 } catch (Exception e) {
                     Log.e(TAG, "on page finished error !!", e);
                 }
@@ -67,11 +57,11 @@ public class WebViewActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setTextZoom(100);
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.setWebContentsDebuggingEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        webView.loadUrl("file:///android_asset/www/main.html");
-        // webView.loadUrl("https://google.com");
+        webView.loadUrl("file:///android_asset/www/index.html");
         DOX.setWebView(webView);
 
     }
