@@ -122,6 +122,74 @@
 			)
 		);
     }
+
+    function dot_click()
+    {
+    console.log("dot_click start")
+        DOT.setClick(Click
+            .setClickEvent("click event")
+            .setCustomValue(CustomValue.setValue1("click cus1").build())
+            .addCartProduct(Product.setFirstCategory("click first category").setSecondCategory("click second category").setProductCode("click code").build())
+            .build()
+        );
+        console.log("dot_click end")
+    }
+
+    function dot_conversion()
+    {
+        console.log("dot_conversion start")
+        console.log(DOT.setConversion(Conversion
+            .setKeyword("conversion keyword")
+            .setProduct(Product.setFirstCategory("conversion first category").setSecondCategory("conversion second category").setProductCode("conversion code").build())
+            .setMicroConversion1(1)
+            .build()
+        ))
+        console.log("dot_conversion end")
+    }
+
+    function dot_page()
+    {
+        console.log("dot_page start")
+        DOT.setPage(Page
+            .setContentsPath("page content path")
+            .setProduct(Product.setFirstCategory("page first category").setSecondCategory("page second category").setProductCode("page code").build())
+            .setIdentify("page pi")
+            .setSearchResultCount(10)
+            .build()
+        )
+        console.log("dot_page end")
+    }
+
+    function dot_purchase()
+    {
+        console.log("dot_purchase start")
+        DOT.setPurchase(
+        Purchase
+            .setCurrency("KRW")
+            .setKeyword("purchase keyword")
+            .setKeywordCategory("purchase keyword category")
+            .setProduct(Product.setFirstCategory("purchase first category").setSecondCategory("purchase second category").setProductCode("purchase code").build())
+            .useLatestCustomValue1(true)
+            .useLatestCustomValue2(false)
+            .useLatestCustomValue3(true)
+            .useLatestCustomValue4(false)
+             .build()
+        )
+        console.log("dot_purchase end")
+    }
+
+    function dot_user()
+    {
+        console.log("dot_user start")
+        DOT.setUser(User
+            .setAge("20")
+            .setGender("M")
+            .setMemberId("id 1001")
+            .setMemberGrade("VIP")
+             .build()
+        )
+        console.log("dot_user end")
+    }
    
   </script>
 
@@ -518,7 +586,7 @@
 
 
 
- </HEAD> 
+ </HEAD>
  <BODY>
   MAIN Page <br/>
   <div id="myDIV">
@@ -527,14 +595,19 @@ This is my main DIV element.
   <a href="/landing/productList.html">Go to Product List</a><br/>
   <a href="/landing/sample.html">Sample Page</a><br/>
   <a href="/landing/test.html">Test Page222</a>
- 
+
  <center>
-	<input id="loginButton" type='button' style='width:90px;height:30px;' onclick='userLogin()' value='login'>
-	<input id="userproperty" type='button' style='width:90px;height:30px;' onclick='setUserProperties()' value='setUserProperties'>
-	<input id="groupproperty" type='button' style='width:90px;height:30px;' onclick='setGroupProperties()' value='setGroupProperties'>
-	<input id="event" type='button' style='width:90px;height:30px;' onclick='logEvent()' value='event'>
-	<input id="converison" type='button' style='width:90px;height:30px;' onclick='logConversion()' value='conversion'>
-	<input id="purchase" type='button' style='width:90px;height:30px;' onclick='logRevenue()' value='purchase'>
+	<!--<input id="loginButton" type='button' style='width:90px;height:30px;' onclick='userLogin()' value='login'>-->
+	<!--<input id="userproperty" type='button' style='width:90px;height:30px;' onclick='setUserProperties()' value='setUserProperties'>-->
+	<!--<input id="groupproperty" type='button' style='width:90px;height:30px;' onclick='setGroupProperties()' value='setGroupProperties'>-->
+	<!--<input id="logEvent" type='button' style='width:90px;height:30px;' onclick='logEvent()' value='event'>-->
+	<!--<input id="logConverison" type='button' style='width:90px;height:30px;' onclick='logConversion()' value='conversion'>-->
+	<!--<input id="logPurchase" type='button' style='width:90px;height:30px;' onclick='logRevenue()' value='purchase'>-->
+     <input id="Click" type='button' style='width:90px;height:30px;' onclick='dot_click()' value='dot_click'>
+     <input id="Conversion" type='button' style='width:90px;height:30px;' onclick='dot_conversion()' value='dot_conversion'>
+     <input id="Page" type='button' style='width:90px;height:30px;' onclick='dot_page()' value='dot_page'>
+     <input id="Purchase" type='button' style='width:90px;height:30px;' onclick='dot_purchase()' value='dot_purchase'>
+     <input id="User" type='button' style='width:90px;height:30px;' onclick='dot_user()' value='dot_user'>
 </center><br/>
 </BODY>
 </HTML>
