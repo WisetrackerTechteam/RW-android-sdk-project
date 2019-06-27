@@ -62,6 +62,7 @@ public class WebViewActivity extends AppCompatActivity {
         webView.setWebContentsDebuggingEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         webView.loadUrl("file:///android_asset/www/index.html");
+        DOT.setWebView(webView);
 
     }
 
