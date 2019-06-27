@@ -12,7 +12,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.sdk.wisetracker.dot.open.api.DOT;
-import com.sdk.wisetracker.dox.open.api.DOX;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -63,7 +62,6 @@ public class WebViewActivity extends AppCompatActivity {
         webView.setWebContentsDebuggingEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         webView.loadUrl("file:///android_asset/www/index.html");
-        DOX.setWebView(webView);
 
     }
 

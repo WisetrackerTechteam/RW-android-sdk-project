@@ -19,7 +19,7 @@ import com.sdk.wisetracker.dox.open.model.XEvent;
 import com.sdk.wisetracker.dox.open.model.XIdentify;
 import com.sdk.wisetracker.dox.open.model.XProduct;
 import com.sdk.wisetracker.dox.open.model.XProperties;
-import com.sdk.wisetracker.dox.open.model.XRevenue;
+import com.sdk.wisetracker.dox.open.model.XPurchase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView xRevenue = findViewById(R.id.dox_revenue);
         xRevenue.setOnClickListener(v -> {
-            DOX.logRevenue(new XRevenue.Builder()
+            DOX.logPurchase(new XPurchase.Builder()
                     .setRevenueType("revenue")
                     .setCurrency("krw")
                     .setOrderNo("ordno")
