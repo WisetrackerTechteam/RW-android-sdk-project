@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.sdk.wisetracker.dot.open.api.DOT;
+import com.sdk.wisetracker.dox.open.api.DOX;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -32,13 +33,14 @@ public class WebViewActivity extends AppCompatActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+                DOT.onStartWebPage();
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 try {
-                    DOT.setJavascriptInjection(view);
+                    DOT.onFinishWebPage(view);
                 } catch (Exception e) {
                     Log.e(TAG, "on page finished error !!", e);
                 }
@@ -62,7 +64,7 @@ public class WebViewActivity extends AppCompatActivity {
         webView.setWebContentsDebuggingEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         webView.loadUrl("file:///android_asset/www/index.html");
-        DOT.setWebView(webView);
+        DOX.setWebView(webView);
 
     }
 
