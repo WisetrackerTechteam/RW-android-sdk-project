@@ -115,8 +115,13 @@ public class MainActivity extends AppCompatActivity {
             DOT.setPurchase(new Purchase.Builder()
                     .setProduct(new Product.Builder()
                             .setProductCode("product code")
+                            .setFirstCategory("first category")
+                            .setSecondCategory("second category")
+                            .setThirdCategory("third category")
                             .setOptionalAmount1(1d)
                             .setOptionalAmount2(2d)
+                            .setOrderAmount(2000)
+                            .setOrderQuantity(10)
                             .build())
                     .build());
             Toast.makeText(this, "Purchase 발생", Toast.LENGTH_SHORT).show();
