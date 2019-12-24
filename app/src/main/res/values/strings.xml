@@ -2,7 +2,7 @@
     <string name="app_name">app</string>
     <string-array name="dotAuthorizationKey">
         <item name="useMode">1</item>
-        <item name="domain">http://collector.naver.wisetracker.co.kr/</item>
+        <item name="domain">https://stg-app-wcs.naver.com/</item>
         <!--<item name="domain">http://125.209.214.9/</item> release domain -->
         <item name="serviceNumber">103</item>
         <item name="expireDate">14</item>
