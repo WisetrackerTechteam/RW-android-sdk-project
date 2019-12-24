@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setData() {
 
-        DOT.initialization(this);
+//        DOT.initialization(this);
 
         TextView click = findViewById(R.id.dot_click);
         click.setOnClickListener(v -> {
