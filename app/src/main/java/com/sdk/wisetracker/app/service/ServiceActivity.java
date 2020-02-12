@@ -6,9 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+
+import com.sdk.wisetracker.app.R;
 
 public class ServiceActivity extends Activity {
 
@@ -17,42 +18,30 @@ public class ServiceActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getData(getIntent());
-        setService();
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        getData(intent);
+        setContentView(R.layout.service_activity);
+        findViewById(R.id.start_service).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startService();
+            }
+        });
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.i("[TestService]", "main destroy");
         if (serviceIntent != null) {
             stopService(serviceIntent);
         }
+        super.onDestroy();
     }
 
-    private void getData(Intent intent) {
-        if (intent == null || !intent.hasExtra(ServiceActivity.class.getSimpleName())) {
-            return;
-        }
-        String data = intent.getStringExtra(ServiceActivity.class.getSimpleName());
-        if (TextUtils.isEmpty(data)) {
-            return;
-        }
-        Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
-    }
-
-    private void setService() {
+    private void startService() {
         try {
-            serviceIntent = new Intent(this, TestService.class);
-            if (isServiceRunning(TestService.class)) {
-                return;
-            }
+            Intent serviceIntent = new Intent(this, TestService.class);
+//            if (isServiceRunning(TestService.class)) {
+//                return;
+//            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 serviceIntent.setAction("TEST");
                 startForegroundService(serviceIntent);
