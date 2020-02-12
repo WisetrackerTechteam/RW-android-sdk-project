@@ -10,8 +10,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.sdk.wisetracker.base.common.base.BaseLogUtil;
-import com.sdk.wisetracker.dot.open.api.DOT;
+import com.sdk.wisetracker.new_dot.open.DOT;
 
 import java.util.Set;
 
@@ -22,7 +21,6 @@ public class LinkActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BaseLogUtil.getInstance().d(TAG, "from deep link");
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         params.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         params.dimAmount = 0.5f;
@@ -48,7 +46,7 @@ public class LinkActivity extends Activity {
             String referrerString = getReferrer().toString();
             Log.i("wisetracker", "intent extra data (REFERRER) : " + referrer);
         }
-        DOT.setDeepLink(this, getIntent());
+        DOT.setDeepLink(getIntent());
         printAllExtraIntent();
     }
 
