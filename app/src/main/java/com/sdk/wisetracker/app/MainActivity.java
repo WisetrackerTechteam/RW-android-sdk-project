@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
+import com.google.gson.Gson;
 import com.sdk.wisetracker.dox.open.api.DOX;
 import com.sdk.wisetracker.dox.open.model.XConversion;
 import com.sdk.wisetracker.dox.open.model.XEvent;
@@ -15,8 +15,6 @@ import com.sdk.wisetracker.dox.open.model.XProduct;
 import com.sdk.wisetracker.dox.open.model.XProperties;
 import com.sdk.wisetracker.dox.open.model.XPurchase;
 import com.sdk.wisetracker.new_dot.open.DOT;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,75 +107,77 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logEvent() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("g1", "goal 1");
-        map.put("g2", "goal 2");
-        map.put("g3", "goal 3");
-        map.put("g4", "goal 4");
-        map.put("g5", "goal 5");
-        map.put("g6", "goal 6");
-        map.put("g7", "goal 7");
-        map.put("g8", "goal 8");
-        map.put("g9", "goal 9");
-        map.put("910", "goal 10");
-        DOT.logEvent(map);
+        Map<String, Object> eventMap = new HashMap<>();
+        eventMap.put("g1", "goal 1");
+        eventMap.put("g2", "goal 2");
+        eventMap.put("g3", "goal 3");
+        eventMap.put("g4", "goal 4");
+        eventMap.put("g5", "goal 5");
+        eventMap.put("g6", "goal 6");
+        eventMap.put("g7", "goal 7");
+        eventMap.put("g8", "goal 8");
+        eventMap.put("g9", "goal 9");
+        eventMap.put("g10", "goal 10");
+        DOT.logEvent(eventMap);
     }
 
     private void logClick() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("ckTp", "click type");
-        map.put("ckData", "click data");
-        map.put("mvt1", "event mvt 1");
-        map.put("mvt2", "event mvt 2");
-        map.put("mvt3", "event mvt 3");
-        map.put("mvt4", "event mvt 4");
-        map.put("mvt5", "event mvt 5");
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("orderNo", "ORD001");
-        jsonObject.addProperty("currency", "KRW");
-        jsonObject.addProperty("pg1", "sports");
-        jsonObject.addProperty("pg2", "fashion");
-        jsonObject.addProperty("pg3", "cloth");
-        jsonObject.addProperty("pnc", "EVENT001");
-        jsonObject.addProperty("ordPno", "POPULARABC");
-        jsonObject.addProperty("amt", "300,000");
-        jsonObject.addProperty("ea", "3");
-        jsonObject.addProperty("mvt1", "mvt1");
-        jsonObject.addProperty("pncAtr1", "attribute 1");
-        map.put("product", jsonObject.toString());
-        DOT.logClick(map);
+        Map<String, Object> clickMap = new HashMap<>();
+        clickMap.put("ckTp", "click type");
+        clickMap.put("ckData", "click data");
+        clickMap.put("mvt1", "event mvt 1");
+        clickMap.put("mvt2", "event mvt 2");
+        clickMap.put("mvt3", "event mvt 3");
+        clickMap.put("mvt4", "event mvt 4");
+        clickMap.put("mvt5", "event mvt 5");
+        Map<String, Object> productMap = new HashMap<>();
+        productMap.put("orderNo", "ORD001");
+        productMap.put("currency", "KRW");
+        productMap.put("pg1", "sports");
+        productMap.put("pg2", "fashion");
+        productMap.put("pg3", "cloth");
+        productMap.put("pnc", "EVENT001");
+        productMap.put("ordPno", "POPULARABC");
+        productMap.put("amt", "300,000");
+        productMap.put("ea", "3");
+        productMap.put("mvt1", "mvt1");
+        productMap.put("pncAtr1", "attribute 1");
+        clickMap.put("product", productMap);
+        String json = new Gson().toJson(productMap);
+        DOT.logClick(productMap);
     }
 
     private void logPurchase() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("keyword", "purchase");
-        map.put("keywordCategory", "CAMPAIGN");
-        JSONArray jsonArray = new JSONArray();
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("orderNo", "ORD001");
-        jsonObject.addProperty("currency", "KRW");
-        jsonObject.addProperty("pg1", "sports");
-        jsonObject.addProperty("pg2", "fashion");
-        jsonObject.addProperty("pg3", "cloth");
-        jsonObject.addProperty("pnc", "PNC001");
-        jsonObject.addProperty("ordPno", "BESTABC");
-        jsonObject.addProperty("amt", "100,000");
-        jsonObject.addProperty("ea", "1");
-        jsonObject.addProperty("mvt1", "mvt1");
-        jsonArray.put(jsonObject);
-        map.put("products", jsonArray.toString());
-        DOT.logPurchase(map);
+        Map<String, Object> purchaseMap = new HashMap<>();
+        purchaseMap.put("keyword", "purchase");
+        purchaseMap.put("keywordCategory", "CAMPAIGN");
+        Map<String, Object> productMap = new HashMap<>();
+        productMap.put("orderNo", "ORD001");
+        productMap.put("currency", "KRW");
+        productMap.put("pg1", "sports");
+        productMap.put("pg2", "fashion");
+        productMap.put("pg3", "cloth");
+        productMap.put("pnc", "PNC001");
+        productMap.put("ordPno", "BESTABC");
+        productMap.put("amt", "100,000");
+        productMap.put("ea", "1");
+        productMap.put("mvt1", "mvt1");
+        List<Map<String, Object>> productList = new ArrayList<>();
+        productList.add(productMap);
+        purchaseMap.put("products", productList);
+        String json = new Gson().toJson(purchaseMap);
+        DOT.logPurchase(purchaseMap);
     }
 
     private void logScreen() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("pi", "main.page");
-        map.put("skwd", "MEMBERSHIP");
-        map.put("scart", "SPORTS");
-        map.put("cp", "path");
-        map.put("sresult", "10");
-        map.put("mvt1", "product mvt");
-        DOT.logScreen(map);
+        Map<String, Object> pageMap = new HashMap<>();
+        pageMap.put("pi", "main.page");
+        pageMap.put("skwd", "MEMBERSHIP");
+        pageMap.put("scart", "SPORTS");
+        pageMap.put("cp", "path");
+        pageMap.put("sresult", "10");
+        pageMap.put("mvt1", "product mvt");
+        DOT.logScreen(pageMap);
     }
 
     private void logXConversion() {
