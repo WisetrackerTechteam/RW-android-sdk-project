@@ -23,11 +23,15 @@ public class TestService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        String thread = Thread.currentThread().getName();
+        Log.d(TAG, thread);
         Log.i(TAG, "service create");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        String thread = Thread.currentThread().getName();
+        Log.d(TAG, thread);
         Log.i(TAG, "on start command");
         Log.i(TAG, "action : " + intent.getAction());
         setNotification();
@@ -56,9 +60,13 @@ public class TestService extends Service {
 
     private void serviceRun() {
         try {
+            String name = Thread.currentThread().getName();
+            Log.d(TAG, "service thread name : " + name);
             Thread thread = new Thread() {
                 @Override
                 public void run() {
+                    String name = Thread.currentThread().getName();
+                    Log.d(TAG, "run thread name : " + name);
                     while (flag) {
                         try {
                             i++;
