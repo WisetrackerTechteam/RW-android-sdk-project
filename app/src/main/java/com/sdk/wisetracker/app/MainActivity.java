@@ -37,12 +37,6 @@ public class MainActivity extends AppCompatActivity {
         logScreen();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        DOT.onStopPage(this);
-    }
-
     private void setData() {
 
         TextView click = findViewById(R.id.dot_click);

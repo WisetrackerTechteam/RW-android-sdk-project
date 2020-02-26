@@ -17,6 +17,7 @@ import com.sdk.wisetracker.new_dot.open.DOT;
 public class WebViewActivity extends AppCompatActivity {
 
     private final String TAG = "WebViewActivity";
+    private WebView webView = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,9 +26,15 @@ public class WebViewActivity extends AppCompatActivity {
         setWebView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        webView.loadUrl("https://www.naver.com");
+    }
+
     private void setWebView() {
 
-        WebView webView = findViewById(R.id.web_view);
+        webView = findViewById(R.id.web_view);
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -40,7 +47,7 @@ public class WebViewActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 try {
-                    DOT.onStopPage(view.getContext());
+
                 } catch (Exception e) {
                     Log.e(TAG, "on page finished error !!", e);
                 }
@@ -63,7 +70,8 @@ public class WebViewActivity extends AppCompatActivity {
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.setWebContentsDebuggingEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        webView.loadUrl("file:///android_asset/www/index.html");
+        //webView.loadUrl("file:///android_asset/www/index.html");
+        //webView.loadUrl("https://www.naver.com");
         DOX.setWebView(webView);
 
     }

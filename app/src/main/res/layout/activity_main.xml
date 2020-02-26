@@ -69,7 +69,7 @@
             android:background="@drawable/rect_drawable"
             android:gravity="center"
             android:padding="10dp"
-            android:text="PAGE"
+            android:text="Move to PAGE 2"
             android:textColor="#000000"
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@id/dot_purchase"
