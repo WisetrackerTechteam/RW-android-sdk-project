@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+  <TITLE> New Document </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+    <!-- <script type="text/javascript" src="/landing/js/advanced/Dot.js"></script>  -->
+<!-- Client Library of Web Analytics ( naver ) -->
+<!-- <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script> -->
+<script type="text/javascript">
+// if(!wcs_add) var wcs_add = {};
+// wcs_add["wa"] = "57f261af1ad940";
+// wcs_do();
+// DOT.setPairingIdentityData(11111);
+	window.onload = function() {
+		// DOT.onStartWebPage();	
+	
+		// var screen = new Object();
+			
+		// screen["pi"] = "main";
+		// screen["pnc"] = "pnc0001";
+		// DOT.logScreen(screen);
+		setTimeout(function(){	
+			DOT.onStartPage();
+		
+			// var screen = new Object();
+				
+			// screen["pi"] = "main";
+			// screen["pnc"] = "pnc0001";
+			// DOT.logScreen(screen);
+
+		},500);
+
+	}
+
+	
+
+
+	// document.addEventListener("DOMContentLoaded", function(){
+	// 	DOT.onStartWebPage();	
+	// 	var screen = new Object();
+			
+	// 	screen["pi"] = "main";
+	// 	screen["pnc"] = "pnc0001";
+	// 	DOT.logScreen(screen);
+	
+	// });
+</script>
+  <script>
+   
+  	<!-- DOT Tagging Area -->
+//   	DOT.setWebContentsRequestTime("1523423411111");
+//   	
+// 	DOT.setPage(
+// 		DOT
+// 		.createPage()
+// 		.setContentsPath("Cp1")
+// 		.setIdentify("MAIN")
+// 	);
+	
+	function userLogin()
+    {
+    		//alert("user Login");
+//   		DOT.setUser(
+//  			DOT
+//  			.createUser()
+//  			.setMember("Y")
+// 			.setGender("F")
+// 			.setAttribute1("VIP")
+//  		)
+		DOT.setUser(User.setGender("M")
+						.setAttr1("user Attr1")
+						.setAge("A")
+					);
+
+		//DOT.setPurchase(Purchase.setCurrency("KRW"));
+
+	} 
+	
+	function userLogout() {
+		DOT.setUserLogout();
+	}
+    function setTime()
+    {
+//     	 DOT.setWebContentsRequestTime("1523423423453");
+    }
+    
+    function logClick()
+ 	{
+        console.log("[wisetracker] log Click");
+        console.log(DOT);
+		var click = new Object();
+		click["ckTp"] = "addCart";
+		click["ckData"] = "iphone";
+		console.log(click);
+		DOT.logClick(click);
+ 	}
+
+ 	function purchaseEvent()
+    {
+		// var purchase = new Object();
+		// purchase["ordNo"] = "your Order Number"
+		// purchase["curcy"] = "KRW"
+
+		// var product1 = new Object();
+		// product1["pg1"] = "상품카테고리(대)"
+		// product1["pnc"] = "상품코드1"
+		// product1["pnAtr1"] = "상품속성#1"
+
+		// var product2 = new Object();
+		// product2["pg1"] = "상품카테고리(대)"
+		// product2["pnc"] = "상품코드2"
+		// product2["pnAtr1"] = "상품속성#2"
+
+		// var productArray = new Array();
+		// productArray.push(product1)
+		// productArray.push(product2)
+		// purchase["product"] =  productArray;
+
+		// DOT.logPurchase(purchase);
+
+        console.log("[wisetracker] logPurchase Click");
+
+		var purchase = new Object();
+		purchase["ordNo"] = "your Order Number"
+		purchase["curcy"] = "KRW"
+
+		var product1 = new Object();
+		product1["pg1"] = "상품카테고리(대)"
+		product1["pnc"] = "상품코드1"
+		product1["pnAtr1"] = "상품속성#1"
+	
+		var productArray = new Array();
+		productArray.push(product1)
+		purchase["product"] = productArray
+
+		purchase["mvt1"] = "mvt 1"
+		purchase["mvt2"] = "mvt 2"
+		purchase["mvt3"] = "mvt 3"
+		purchase["mvt4"] = "mvt 4"
+		purchase["mvt5"] = "mvt 5"
+		
+		DOT.logPurchase(purchase)
+	}
+	
+	function logEvent()
+    {
+        console.log("[wisetracker] logEvent Click");
+    	var event = new Object();
+		
+		event["eventCode"] = "eventCode001";
+		event["eCoupon"] = "eCoupon";
+
+		DOT.logEvent(event);
+	}
+	
+	function logScreen()
+    {
+		// var screen = new Object();
+		// screen["pi"] = "PDV";
+		// screen["pg1"] = "상품카테고리(대)";
+		// screen["pnc"] = "상품코드";
+		// screen["pnAtr1"] = "상품속성#1"
+		// DOT.logScreen(screen);
+
+		// var screen = new Object();
+		// screen["cp"] = "^메인^계정정보 수정";
+		// DOT.logScreen(screen);
+
+		console.log("[wisetracker] logScreen Click");
+
+		var screen = new Object();
+		screen["cp"] = "^Main^Account";
+		screen["mvt1"] = "page mvt 1";
+		screen["mvt2"] = "page mvt 2";
+		screen["mvt3"] = "page mvt 3";
+		screen["mvt4"] = "page mvt 4";
+		screen["mvt5"] = "page mvt 5";
+		DOT.logScreen(screen);
+
+		// var screen = new Object();
+		// screen["skwd"] = "청바지";
+		// screen["scart"] = "통합검색";
+		// screen["sresult"] = 1200;
+		// DOT.logScreen(screen);
+	
+    }
+    
+   
+  </script>  
+ </HEAD> 
+ <BODY>
+  MAIN Page <br/>
+  <div id="myDIV">
+This is my main DIV element.
+</div>
+  <a href="/android_asset/www/productList.html">Go to Product List</a><br/>
+  <!--<a href="/productList.html">Go to Product List</a><br/>-->
+  <a href="/sample.html">Sample Page</a><br/>
+  <a href="/test.html">Test Page222</a>
+ 
+ <center>
+	<input id="loginButton" type='button' style='width:90px;height:30px;' onclick='userLogin()' value='login'>
+	<input id="logoutButton" type='button' style='width:90px;height:30px;' onclick='userLogout()' value='logout'>
+	<input id="setTime" type='button' style='width:90px;height:30px;' onclick='logClick()' value='logClick'>
+	<input id="purchase" type='button' style='width:90px;height:30px;' onclick='purchaseEvent()' value='puchase1'>
+	<input id="setGoal" type='button' style='width:90px;height:30px;' onclick='logEvent()' value='logEvent'>
+	<input id="logScreen" type='button' style='width:90px;height:30px;' onclick='logScreen()' value='logScreen1'>
+</center><br/>
+</BODY>
+</HTML>
