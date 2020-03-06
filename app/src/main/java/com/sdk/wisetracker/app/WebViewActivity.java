@@ -11,7 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.sdk.wisetracker.dox.open.api.DOX;
+import com.sdk.wisetracker.new_dot.open.DOT;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -28,7 +28,6 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        webView.loadUrl("https://www.naver.com");
     }
 
     private void setWebView() {
@@ -38,7 +37,6 @@ public class WebViewActivity extends AppCompatActivity {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
                 Log.e(TAG, "on web page started ");
             }
 
@@ -46,6 +44,7 @@ public class WebViewActivity extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 Log.e(TAG, "on web page finished ");
+                DOT.injectJavascript(view);
             }
 
         });
@@ -65,9 +64,10 @@ public class WebViewActivity extends AppCompatActivity {
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.setWebContentsDebuggingEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        webView.loadUrl("file:///android_asset/www/main.html");
         //webView.loadUrl("file:///android_asset/www/index.html");
         //webView.loadUrl("https://www.naver.com");
-        DOX.setWebView(webView);
+        DOT.setWebView(webView);
 
     }
 
