@@ -14,15 +14,12 @@
 
 	window.onload = function() {
 		setTimeout(function(){	
-			DOT.onStartPage();	
-		
-			// var screen = new Object();
-				
-			// screen["pi"] = "main";
-			// screen["pnc"] = "pnc0001";
-			// DOT.logScreen(screen);
-
-		},500); 
+			DOT.onStartPage();
+			var screen = new Object();
+			screen["pi"] = "web-product-list";
+			screen["pnc"] = "pnc0002";
+			DOT.logScreen(screen);
+		},500);
 		// try{
 		// 	console.log("window.DOT_WEB_APP :"+window.DOT_WEB_APP);
 		// 	if( window.DOT_WEB_APP != undefined && window.DOT_WEB_APP != null ){
