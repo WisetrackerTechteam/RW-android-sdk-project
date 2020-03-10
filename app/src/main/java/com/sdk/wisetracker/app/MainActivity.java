@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         list.add("list 2");
         list.add("list 3");
 
-        DOX.logConversion(
+        DOX.logXConversion(
                 new XConversion.Builder()
                         .setEventName("Conversion")
                         .setProperties(
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logXEvent() {
-        DOX.logEvent(new XEvent.Builder()
+        DOX.logXEvent(new XEvent.Builder()
                 .setEventName("log event")
                 .setProperties(new XProperties.Builder()
                         .set("put1", "put value")
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logXPurchase() {
-        DOX.logPurchase(new XPurchase.Builder()
+        DOX.logXPurchase(new XPurchase.Builder()
                 .setRevenueType("revenue")
                 .setCurrency("krw")
                 .setOrderNo("ordno")
