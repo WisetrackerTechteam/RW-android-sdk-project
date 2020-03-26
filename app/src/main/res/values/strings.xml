@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">app</string>
+    <string name="app_name">RW-Test-app</string>
     <string-array name="dotAuthorizationKey">
         <item name="useMode">1</item>
         <item name="domain">https://stg-app-wcs.naver.com/</item>
