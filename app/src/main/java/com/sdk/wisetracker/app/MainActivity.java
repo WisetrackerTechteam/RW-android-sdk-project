@@ -143,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void logPurchase() {
         Map<String, Object> purchaseMap = new HashMap<>();
+        purchaseMap.put("ordNo", "PORD0070");
         purchaseMap.put("keyword", "purchase");
         purchaseMap.put("keywordCategory", "CAMPAIGN");
         Map<String, Object> productMap = new HashMap<>();
-        productMap.put("orderNo", "ORD001");
         productMap.put("currency", "KRW");
         productMap.put("pg1", "sports");
         productMap.put("pg2", "fashion");
