@@ -1,0 +1,55 @@
+1. 저장소
+
+https://github.com/WisetrackerTechteam/RW-android-base-sdk			<BASE>
+https://github.com/WisetrackerTechteam/RW-android-new-dot-sdk		<DOT>
+https://github.com/WisetrackerTechteam/RW-android-dox-sdk			<DOX>
+
+2. SDK 배포 방법
+
+- Bintray 계정
+  ID : wisetracker
+  Pw : xmfozj123
+  API_KEY : 06d6e79b1d833d48c9b68928674c94d9b7e87e2e
+
+- 프로젝트
+  base_module_test : RW BASE SDK 테스트 저장소
+  new_dot_module_test : RW DOT SDK 테스트 저장소
+  dox_module_test : RW DOX SDK 테스트 저장소
+
+- 배포 방법
+
+a. bintray.debug.properties 파일에 'BINTRAY_USER', 'BINTRAY_API_KEY' 값 추가
+	BINTRAY_USER=wisetracker
+	BINTRAY_API_KEY=06d6e79b1d833d48c9b68928674c94d9b7e87e2e
+
+b. 배포 버전 확인
+	bintray.version.properties 파일 VERSION_PATCH 값 확인
+	-> 배포시 모듈별 현재 값에서 1 증가
+
+c. SDK Bintray 업로드
+    base 모듈 업로드
+    -> ./gradlew clean build base:bintrayUpload
+    dot 모듈 업로드
+    -> ./gradlew clean build new_dot:bintrayUpload
+    dox 모듈 업로드
+    -> ./gradlew clean build dox:bintrayUpload
+    전체 모듈 업로드
+    ./gradlew clean build base:bintrayUpload build new_dot:bintrayUpload build dox:bintrayUpload
+
+
+3. SDK .JAR 파일 추출
+
+    **유니티 프로젝트에 포함될 SDK .jar 파일 추출시 적용**
+
+    - BASE 모듈 jar 추출
+    안드로이드 스튜디오 Gradle/base/Tasks/other/exportjar 클릭
+    -> 프로젝트경로/base/release/wisetracker-base.jar 생성
+
+    - DOT 모듈 jar 추출
+    안드로이드 스튜디오 Gradle/dot/Tasks/other/exportjar 클릭
+    -> 프로젝트경로/new_dot/release/wisetracker-dot.jar 생성
+
+    - DOX 모듈 jar 추출
+    안드로이드 스튜디오 Gradle/dox/Tasks/other/exportjar 클릭
+    -> 프로젝트경로/dox/release/wisetracker-dox.jar 생성
+
