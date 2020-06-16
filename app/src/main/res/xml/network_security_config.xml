@@ -4,6 +4,7 @@
         <domain includeSubdomains="true">collector.naver.wisetracker.co.kr</domain>
         <domain includeSubdomains="true">app-wcs.naver.com</domain>
         <domain includeSubdomains="true">report.wisetracker.co.kr</domain>
+        <domain includeSubdomains="true">rw-collector-env.ap-northeast-2.elasticbeanstalk.com</domain>
     </domain-config>
     <!--<base-config cleartextTrafficPermitted="true" />-->
 </network-security-config>
