@@ -3,6 +3,7 @@ package com.sdk.wisetracker.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,26 +35,48 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         DOT.onStartPage(this);
-        logScreen();
+        Map<String, Object> pageMap = new HashMap<>();
+        pageMap.put("pi", "pageId");
+        DOT.logScreen(pageMap);
+        //logScreen();
     }
 
     private void setData() {
 
         TextView click = findViewById(R.id.dot_click);
         click.setOnClickListener(v -> {
-            logClick();
+            Map<String, Object> clickMap = new HashMap<>();
+            clickMap.put("ckTp", "click type");
+            clickMap.put("ckData", "click data");
+            DOT.logClick(clickMap);
+            //logClick();
             Toast.makeText(this, "Click 발생", Toast.LENGTH_SHORT).show();
         });
 
         TextView conversion = findViewById(R.id.dot_conversion);
         conversion.setOnClickListener(v -> {
-            logEvent();
+            //logEvent();
+            Map<String, Object> eventMap = new HashMap<>();
+            eventMap.put("event", "login");
+            eventMap.put("loginTp", "facebook");
+            DOT.logEvent(eventMap);
             Toast.makeText(this, "Conversion 발생", Toast.LENGTH_SHORT).show();
         });
 
         TextView purchase = findViewById(R.id.dot_purchase);
         purchase.setOnClickListener(v -> {
-            logPurchase();
+            Map<String, Object> purchaseMap = new HashMap<>();
+            purchaseMap.put("ordNo", "주문번호");
+            purchaseMap.put("curcy", "화폐단위");
+            Map<String, Object> productMap = new HashMap<>();
+            productMap.put("pg1", "상품카테고리(대)");
+            productMap.put("pnc", "상품코드1");
+            productMap.put("pnAtr1", "상품속성#1");
+            List<Map<String, Object>> productList = new ArrayList<>();
+            productList.add(productMap);
+            purchaseMap.put("products", productList);
+            DOT.logPurchase(purchaseMap);
+            //logPurchase();
             Toast.makeText(this, "Purchase 발생", Toast.LENGTH_SHORT).show();
         });
 
@@ -138,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         productMap.put("pncAtr1", "attribute 1");
         clickMap.put("product", productMap);
         String json = new Gson().toJson(productMap);
-        DOT.logClick(productMap);
+        DOT.logClick(clickMap);
     }
 
     private void logPurchase() {
