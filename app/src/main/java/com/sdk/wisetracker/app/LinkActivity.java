@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,7 +18,7 @@ public class LinkActivity extends Activity {
     private final String TAG = "LinkActivity";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         params.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;

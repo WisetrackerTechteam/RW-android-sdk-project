@@ -1,9 +1,8 @@
 package com.sdk.wisetracker.app;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -13,13 +12,13 @@ import android.webkit.WebViewClient;
 
 import com.sdk.wisetracker.new_dot.open.DOT;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends Activity {
 
     private final String TAG = "WebViewActivity";
     private WebView webView = null;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_view_activity);
         setWebView();
