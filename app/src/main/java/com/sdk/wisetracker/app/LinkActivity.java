@@ -17,6 +17,9 @@ public class LinkActivity extends Activity {
 
     private final String TAG = "LinkActivity";
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +31,21 @@ public class LinkActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.link_activity);
         checkLink();
-        Intent intent = new Intent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);//액티비티 띄우기
         finish();
+//        Intent intent = new Intent();
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+//        finish();
+    }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        DOT.setDeepLink(getApplicationContext(), getIntent());
     }
 
     private void checkLink() {
@@ -45,7 +59,7 @@ public class LinkActivity extends Activity {
             String referrerString = getReferrer().toString();
             Log.i("wisetracker", "intent extra data (REFERRER) : " + referrer);
         }
-        DOT.setDeepLink(getIntent());
+        DOT.setDeepLink(getApplicationContext(), getIntent());
         printAllExtraIntent();
     }
 
