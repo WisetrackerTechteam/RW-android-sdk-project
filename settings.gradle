@@ -1,1 +1,1 @@
-include ':base', ':dot', ':dox', ':app', ':new_dot'
+include ':base', ':dox', ':app', ':new_dot'
