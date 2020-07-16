@@ -33,17 +33,15 @@
         <activity android:name=".ThirdActivity" />
         <activity android:name=".WebViewActivity" />
 
-        <activity android:name=".LinkActivity">
 
+        <activity android:name=".LinkActivity" android:launchMode="singleTop">
             <intent-filter>
-
-                <data android:scheme="wisetracker" />
-
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
+                <!-- 딥링크로 진입될 스키마와 호스트 정보 수정 -->
+                <data android:host="wisetracker.co.kr"
+                    android:scheme="wisetracker" />
             </intent-filter>
 
             <!--<intent-filter>-->
@@ -90,6 +88,9 @@
             </intent-filter>
         </receiver>
         -->
+
+
+
 
     </application>
 
