@@ -6,72 +6,74 @@
   <META NAME="Author" CONTENT="">
   <META NAME="Keywords" CONTENT="">
   <META NAME="Description" CONTENT="">
+  <meta charset="UTF-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
     <!-- <script type="text/javascript" src="/landing/js/advanced/Dot.js"></script>  -->
 <!-- Client Library of Web Analytics ( naver ) -->
 <!-- <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script> -->
-<script type="text/javascript">
-// if(!wcs_add) var wcs_add = {};
-// wcs_add["wa"] = "57f261af1ad940";
-// wcs_do();
-// DOT.setPairingIdentityData(11111);
-	window.onload = function() {
-		// DOT.onStartWebPage();	
-	
-		// var screen = new Object();
-			
-		// screen["pi"] = "main";
-		// screen["pnc"] = "pnc0001";
-		// DOT.logScreen(screen);
-		setTimeout(function(){	
-			DOT.onStartPage();
-			var screen = new Object();
-			screen["pi"] = "web-main";
-			screen["pnc"] = "pnc0001";
-			DOT.logScreen(screen);
-		},500);
 
+<script type="wisetracker/text" id="wiseTracker2">
+    
+	var screen = new Object();
+	screen["cp"] = "^Main^Account";
+	screen["mvt1"] = "page mvt 1";
+	screen["mvt2"] = "page mvt 2";
+	screen["mvt3"] = "page mvt 3";
+	screen["mvt4"] = "page mvt 4";
+	screen["mvt5"] = "page mvt 5";
+	DOT.logScreen(screen);
+</script>
+
+<script type="text/javascript">
+		
+
+ 
+
+ //   	window.onload = function() {
+	// 	setTimeout(function(){	
+	// 		console.log("dotStarter!!!");
+	// 		DOT.onStartPage();	
+	// 	},500); 
+	// };
+	function windowLoadCallBack() {
+
+		var purchase = new Object();
+		purchase["ordNo"] = "your Order Number"
+		purchase["curcy"] = "KRW"
+
+		var product1 = new Object();
+		product1["pg1"] = "상품카테고리(대)"
+		product1["pnc"] = "상품코드1"
+		product1["pnAtr1"] = "상품속성#1"
+	
+		var productArray = new Array();
+		productArray.push(product1)
+		purchase["product"] = productArray
+
+		purchase["mvt1"] = "mvt 1"
+		purchase["mvt2"] = "mvt 2"
+		purchase["mvt3"] = "mvt 3"
+		purchase["mvt4"] = "mvt 4"
+		purchase["mvt5"] = "mvt 5"
+		
+		//console.log(purchase);
+		DOT.logPurchase(purchase)  
 	}
 
-	
 
 
-	// document.addEventListener("DOMContentLoaded", function(){
-	// 	DOT.onStartWebPage();	
-	// 	var screen = new Object();
-			
-	// 	screen["pi"] = "main";
-	// 	screen["pnc"] = "pnc0001";
-	// 	DOT.logScreen(screen);
-	
-	// });
-</script>
-  <script>
-   
   	<!-- DOT Tagging Area -->
-//   	DOT.setWebContentsRequestTime("1523423411111");
-//   	
-// 	DOT.setPage(
-// 		DOT
-// 		.createPage()
-// 		.setContentsPath("Cp1")
-// 		.setIdentify("MAIN")
-// 	);
-	
 	function userLogin()
     {
-    		//alert("user Login");
-//   		DOT.setUser(
-//  			DOT
-//  			.createUser()
-//  			.setMember("Y")
-// 			.setGender("F")
-// 			.setAttribute1("VIP")
-//  		)
-		DOT.setUser(User.setGender("M")
-						.setAttr1("user Attr1")
-						.setAge("A")
-					);
 
+        if( window.DOT == null || window.DOT == undefined ){
+			DOT.setUser(User.setGender("M")
+							.setAttr1("user Attr1")
+							.setAge("A")
+						);
+		}
 		//DOT.setPurchase(Purchase.setCurrency("KRW"));
 
 	} 
@@ -86,14 +88,12 @@
     
     function logClick()
  	{
-        console.log("[WiseLog] log Click");
-        console.log(DOT);
+
 		var click = new Object();
 		click["ckTp"] = "addCart";
 		click["ckData"] = "iphone";
-		console.log(click);
 		DOT.logClick(click);
- 	}
+ 	}    
 
  	function purchaseEvent()
     {
@@ -118,8 +118,6 @@
 
 		// DOT.logPurchase(purchase);
 
-        console.log("[WiseLog] logPurchase Click");
-
 		var purchase = new Object();
 		purchase["ordNo"] = "your Order Number"
 		purchase["curcy"] = "KRW"
@@ -139,20 +137,23 @@
 		purchase["mvt4"] = "mvt 4"
 		purchase["mvt5"] = "mvt 5"
 		
+		//console.log(purchase);
 		DOT.logPurchase(purchase)
 	}
 	
 	function logEvent()
     {
-        console.log("[WiseLog] logEvent Click");
-    	var event = new Object();
-		
-		event["eventCode"] = "eventCode001";
-		event["eCoupon"] = "eCoupon";
 
-		DOT.logEvent(event);
+    	if( window.DOT != null && window.DOT != undefined ){
+			var event = new Object();
+			event["eventCode"] = "eventCode001";
+			event["eCoupon"] = "eCoupon";
+			DOT.logEvent(event);
+		}
 	}
-	
+
+
+
 	function logScreen()
     {
 		// var screen = new Object();
@@ -165,9 +166,7 @@
 		// var screen = new Object();
 		// screen["cp"] = "^메인^계정정보 수정";
 		// DOT.logScreen(screen);
-
-		console.log("[WiseLog] logScreen Click");
-
+		alert("logScreen");
 		var screen = new Object();
 		screen["cp"] = "^Main^Account";
 		screen["mvt1"] = "page mvt 1";
@@ -177,6 +176,7 @@
 		screen["mvt5"] = "page mvt 5";
 		DOT.logScreen(screen);
 
+		console.log("logscreen");
 		// var screen = new Object();
 		// screen["skwd"] = "청바지";
 		// screen["scart"] = "통합검색";
@@ -186,25 +186,73 @@
     }
     
    
+	function bodyOnload(){
+		alert("4444");
+		console.log("body load start");
+
+
+		console.log("body load end");
+	}
+	// $(document).ready(function(){
+	// 	console.log("document.ready in jquery");
+	// 	console.log(DOT);
+	// 	console.log("jquery end ");
+	// });
+
+	function purchaseInWT() {
+		alert('purchaseInWT');
+	  // WiseTracker.setGoal("g2", 1);
+	  // WiseTracker.setGender("A");
+	  // WiseTracker.setAge("C");
+	  // WiseTracker.setUserAttribute("uvp1", "B");
+	  // WiseTracker.sendTransaction();
+// WiseTracker.setOrderProductArray(["PROD01","PROD02"]); // 상품정보
+//  WiseTracker.setOrderProductCategoryArray(["CAT01","CAT02"]); // 상품카테고리
+//  WiseTracker.setOrderAmountArray([10000, 20000]); // 주문 상품 총액 (합계)
+//  WiseTracker.setOrderQuantityArray ([1, 2]); // 주문
+//  WiseTracker.setPageIdentity("ODR"); // 주문페이지 PI세팅
+//  WiseTracker.sendTransaction(); // 데이터 전송
+
+
+	WiseTracker.setOrderProductArray(["H_ES1000110"]); //[상담예약 EVENT] 예약하고 선물받으세요! 상품의 고유 상품코드 입력
+	WiseTracker.setOrderQuantityArray([1]);
+	WiseTracker.setOrderAmountArray([10000]); //유저가 실제 결제한 금액을 입력
+	WiseTracker.setOrderNo("20200407CFO1586241838");
+	WiseTracker.setPageIdentity("ODR");
+	WiseTracker.sendTransaction();
+	}
   </script>  
+
+
+
+  <script type="wisetracker/text" id="wiseTracker">
+  	WiseTracker.setOrderProductArray(["H_ES1000110"]); //[상담예약 EVENT] 예약하고 선물받으세요! 상품의 고유 상품코드 입력
+	WiseTracker.setOrderQuantityArray([1]);
+	WiseTracker.setOrderAmountArray([10000]); //유저가 실제 결제한 금액을 입력
+	WiseTracker.setOrderNo("20200407CFO1586241838");
+	WiseTracker.setPageIdentity("ODR");
+	WiseTracker.sendTransaction();
+  </script>
+
+
+
  </HEAD> 
  <BODY>
-  MAIN Page <br/>
+  MAIN Page 0716_2<br/>
   <div id="myDIV">
-This is my main DIV element.
+This is my main DIV element1.
 </div>
-  <a href="/android_asset/www/productList.html">Go to Product List</a><br/>
-  <!--<a href="/productList.html">Go to Product List</a><br/>-->
+  <a href="file:///android_asset/www/productList.html">Go to Product List</a><br/>
   <a href="/sample.html">Sample Page</a><br/>
-  <a href="/test.html">Test Page222</a>
+  <a href="/test.html">Test Page333</a>
  
  <center>
-	<input id="loginButton" type='button' style='width:90px;height:30px;' onclick='userLogin()' value='login'>
+	<input id="loginButton" type='button' style='width:90px;height:30px;' onclick='userLogin()' value='login118'>
 	<input id="logoutButton" type='button' style='width:90px;height:30px;' onclick='userLogout()' value='logout'>
 	<input id="setTime" type='button' style='width:90px;height:30px;' onclick='logClick()' value='logClick'>
 	<input id="purchase" type='button' style='width:90px;height:30px;' onclick='purchaseEvent()' value='puchase1'>
 	<input id="setGoal" type='button' style='width:90px;height:30px;' onclick='logEvent()' value='logEvent'>
-	<input id="logScreen" type='button' style='width:90px;height:30px;' onclick='logScreen()' value='logScreen1'>
-</center><br/>
+	<input id="logScreen" type='button' style='width:90px;height:30px;' onclick='logScreen()' value='logScreen333'>
+	<input id="purchase111" type='button' style='width:90px;height:30px;' onclick='purchaseInWT()' value='revenue in cobe1111'>
 </BODY>
 </HTML>

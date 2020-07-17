@@ -43,6 +43,7 @@ public class WebViewActivity extends Activity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 Log.e(TAG, "on web page finished ");
+               // DOT.onStartPage();
                 DOT.injectJavascript(view);
             }
 
@@ -64,6 +65,7 @@ public class WebViewActivity extends Activity {
         webView.setWebContentsDebuggingEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         webView.loadUrl("file:///android_asset/www/main.html");
+        //webView.loadUrl("http://192.168.0.228:8080/main.html");
         //webView.loadUrl("file:///android_asset/www/index.html");
         //webView.loadUrl("https://www.naver.com");
         DOT.setWebView(webView);

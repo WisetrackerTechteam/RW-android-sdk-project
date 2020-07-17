@@ -7,80 +7,25 @@
   <META NAME="Keywords" CONTENT="">
   <META NAME="Description" CONTENT="">
   <!-- <script src="/landing/js/advanced/Dot.js"></script> -->
-  <script>
-	// document.addEventListener("DOMContentLoaded", function(){
-	
-	// });
-
+  <script type="text/javascript">
 	window.onload = function() {
-		setTimeout(function(){	
-			DOT.onStartPage();
-			var screen = new Object();
-			screen["pi"] = "web-product-list";
-			screen["pnc"] = "pnc0002";
-			DOT.logScreen(screen);
-		},500);
-		// try{
-		// 	console.log("window.DOT_WEB_APP :"+window.DOT_WEB_APP);
-		// 	if( window.DOT_WEB_APP != undefined && window.DOT_WEB_APP != null ){
-		// 		document.getElementById("myDIV").style.display='none';
-		// 		if( window.DOT != undefined && window.DOT != null ){
-		// 			var curHref = document.location.href;
-		// 			switch(curHref){
-		// 				case "http://www.wisetracker.co.kr/":
-		// 					DOT.setPage(
-		// 						DOT.createPage()
-		// 						.setPageIdentity("MAIN")
-		// 						.setContentPath("^메인화면")
-		// 					);
-		// 				break;
-		// 				case "http://www.wisetracker.co.kr/feature/":
-		// 					DOT.setPage(
-		// 						DOT.createPage()
-		// 						.setPageIdentity("FEATURE")
-		// 						.setContentPath("^주요기능")
-		// 					);
-		// 				break;
-		// 				case "http://www.wisetracker.co.kr/marketing-attribution/":
-		// 					DOT.setPage(
-		// 						DOT.createPage()
-		// 						.setPageIdentity("ATTRI")
-		// 						.setContentPath("^성과분석")
-		// 					);
-		// 				break;
-		// 				case "http://www.wisetracker.co.kr/behavioral-analytics/":
-		// 					DOT.setPage(
-		// 						DOT.createPage()
-		// 						.setPageIdentity("BEHAVI")
-		// 						.setContentPath("^행동분석")
-		// 					);
-		// 				break;
-		// 				case "http://www.wisetracker.co.kr/customers/":
-		// 					DOT.setPage(
-		// 						DOT.createPage()
-		// 						.setPageIdentity("CUSTOMER")
-		// 						.setContentPath("^고객사 리퍼런스")
-		// 					);
-		// 				break;
-		// 				case "http://www.wisetracker.co.kr/support/":
-		// 					DOT.setPage(
-		// 						DOT.createPage()
-		// 						.setPageIdentity("SUPPORT")
-		// 						.setContentPath("^이용가이드")
-		// 					);
-		// 				break;
-		// 				case "http://www.wisetracker.co.kr/blog/":
-		// 					DOT.setPage(
-		// 						DOT.createPage()
-		// 						.setPageIdentity("NEWS")
-		// 						.setContentPath("^블로그소식")
-		// 					);
-		// 				break;
-		// 			} 
-		// 		}
+		// var dotStarter = function(){
+		// 	console.log("dotStarter!!!");
+		// 	if( window.DOT == null || window.DOT == undefined ){
+		// 		setTimeout(dotStarter, 200);
+		// 	}else{
+		// 		DOT.onStartPage();
 		// 	}
-		// }catch(e){ console.log("error !!"); }
-	}
+		// };
+		// dotStarter();
+	};
+ //   	window.onload = function() {
+	// 	setTimeout(function(){	
+	// 		console.log("dotStarter!!!");
+	// 		DOT.onStartPage();	
+	// 	},500); 
+	// };
+	
 	function logScreen()
     {
     	var screen = new Object();
@@ -94,15 +39,15 @@
     
  </HEAD> 
  <BODY>
-   product list Page1 <br/>
+   product list Page222 <br/>
      <div id="myDIV">
 This is my product List DIV element.
 </div>
-<a href="/android_asset/www/main.html">Go back </a> <br/>
+<a href="/main.html">Go back </a> <br/>
 
-  <a href="/landing/productDetail.html">Go to Product Detail </a><br/>
+  <a href="file:///android_asset/www/productDetail.html">Go to Product Detail </a><br/>
   <center>
-		<input id="logScreen" type='button' style='width:90px;height:30px;' onclick='logScreen()' value='logScreen1'>
+		<input id="logScreen" type='button' style='width:90px;height:30px;' onclick='logScreen()' value='logScreenRe'>
 	</center>
  </BODY>
 </HTML>
