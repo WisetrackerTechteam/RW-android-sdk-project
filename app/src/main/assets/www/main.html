@@ -23,6 +23,8 @@
 	screen["mvt3"] = "page mvt 3";
 	screen["mvt4"] = "page mvt 4";
 	screen["mvt5"] = "page mvt 5";
+	var campagnName = "기분캠페인명";
+    screen["campaign_name"] = campagnName;
 	DOT.logScreen(screen);
 </script>
 
@@ -68,13 +70,17 @@
 	function userLogin()
     {
 
-        if( window.DOT == null || window.DOT == undefined ){
+
 			DOT.setUser(User.setGender("M")
-							.setAttr1("user Attr1")
-							.setAge("A")
+							.setMemberId("fornew21c")
+							.setAttr1("user Attr123456")
+							.setAge("F")
 						);
-		}
-		//DOT.setPurchase(Purchase.setCurrency("KRW"));
+				var event = new Object();
+				event["event"] = "login_complete";
+				event["loginTp"] = "email";
+				DOT.logEvent(event);
+
 
 	} 
 	

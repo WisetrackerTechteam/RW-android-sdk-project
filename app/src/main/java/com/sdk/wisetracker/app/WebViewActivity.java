@@ -43,7 +43,6 @@ public class WebViewActivity extends Activity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 Log.e(TAG, "on web page finished ");
-               // DOT.onStartPage();
                 DOT.injectJavascript(view);
             }
 

@@ -14,6 +14,7 @@ import com.sdk.wisetracker.dox.open.model.XIdentify;
 import com.sdk.wisetracker.dox.open.model.XProduct;
 import com.sdk.wisetracker.dox.open.model.XProperties;
 import com.sdk.wisetracker.dox.open.model.XPurchase;
+import com.sdk.wisetracker.base.open.model.User;
 import com.sdk.wisetracker.new_dot.open.DOT;
 
 import java.util.ArrayList;
@@ -44,10 +45,28 @@ public class MainActivity extends Activity {
 
         TextView click = findViewById(R.id.dot_click);
         click.setOnClickListener(v -> {
-            Map<String, Object> clickMap = new HashMap<>();
-            clickMap.put("ckTp", "click type");
-            clickMap.put("ckData", "click data");
-            DOT.logClick(clickMap);
+//            Map<String, Object> clickMap = new HashMap<>();
+//            clickMap.put("ckTp", "click type");
+//            clickMap.put("ckData", "click data");
+//            DOT.logClick(clickMap);
+
+
+
+            DOT.setUser(new User.Builder()
+                    .setGender("M")
+                    .setAge("A")
+                    .setAttr1("attr1")
+                    .setLoginTp("facebook")
+                    .setSignupTp("email")
+                    .setMemberId("fornew21c")
+                    .build()
+            );
+
+
+            Map<String, Object> eventMap = new HashMap<>();
+            eventMap.put("event", "event");
+            eventMap.put("pi","evtlist");
+            DOT.logEvent(eventMap);
             //logClick();
             Toast.makeText(this, "Click 발생", Toast.LENGTH_SHORT).show();
         });
@@ -55,9 +74,11 @@ public class MainActivity extends Activity {
         TextView conversion = findViewById(R.id.dot_conversion);
         conversion.setOnClickListener(v -> {
             //logEvent();
+//            eventMap.put("event", "login");
+//            eventMap.put("loginTp", "facebook");
             Map<String, Object> eventMap = new HashMap<>();
-            eventMap.put("event", "login");
-            eventMap.put("loginTp", "facebook");
+            eventMap.put("event", "event");
+            eventMap.put("pi","evtlist");
             DOT.logEvent(eventMap);
             Toast.makeText(this, "Conversion 발생", Toast.LENGTH_SHORT).show();
         });
@@ -123,18 +144,20 @@ public class MainActivity extends Activity {
     }
 
     private void logEvent() {
-        Map<String, Object> eventMap = new HashMap<>();
-        eventMap.put("g1", "goal 1");
-        eventMap.put("g2", "goal 2");
-        eventMap.put("g3", "goal 3");
-        eventMap.put("g4", "goal 4");
-        eventMap.put("g5", "goal 5");
-        eventMap.put("g6", "goal 6");
-        eventMap.put("g7", "goal 7");
-        eventMap.put("g8", "goal 8");
-        eventMap.put("g9", "goal 9");
-        eventMap.put("g10", "goal 10");
-        DOT.logEvent(eventMap);
+        Map<String, Object> event = new HashMap<>();
+        event.put("event", "event");
+        event.put("pi","evtlist");
+//        eventMap.put("g1", "goal 1");
+//        eventMap.put("g2", "goal 2");
+//        eventMap.put("g3", "goal 3");
+//        eventMap.put("g4", "goal 4");
+//        eventMap.put("g5", "goal 5");
+//        eventMap.put("g6", "goal 6");
+//        eventMap.put("g7", "goal 7");
+//        eventMap.put("g8", "goal 8");
+//        eventMap.put("g9", "goal 9");
+//        eventMap.put("g10", "goal 10");
+        DOT.logEvent(event);
     }
 
     private void logClick() {
