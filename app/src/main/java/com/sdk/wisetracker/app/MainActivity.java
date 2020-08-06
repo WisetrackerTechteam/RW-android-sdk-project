@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.sdk.wisetracker.base.open.model.InternalCampaign;
 import com.sdk.wisetracker.dox.open.api.DOX;
 import com.sdk.wisetracker.dox.open.model.XConversion;
 import com.sdk.wisetracker.dox.open.model.XEvent;
@@ -140,6 +141,18 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
             startActivity(intent);
         });
+
+
+        TextView campaign = findViewById(R.id.dot_internalCampaign);
+        campaign.setOnClickListener(v -> {
+
+            InternalCampaign ic = new InternalCampaign.Builder().setInternalCampaign1("campaign1",3).build();
+            DOT.setInternalCampaign(ic);
+
+            Toast.makeText(this, "Campaign 설정 발생", Toast.LENGTH_SHORT).show();
+        });
+
+
 
     }
 
