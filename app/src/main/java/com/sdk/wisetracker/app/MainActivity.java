@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.applinks.AppLinkData;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.sdk.wisetracker.base.open.model.InternalCampaign;
+import com.sdk.wisetracker.base.tracker.common.log.WiseLog;
+import com.sdk.wisetracker.base.tracker.data.model.Const;
 import com.sdk.wisetracker.dox.open.api.DOX;
 import com.sdk.wisetracker.dox.open.model.XConversion;
 import com.sdk.wisetracker.dox.open.model.XEvent;
@@ -17,6 +21,8 @@ import com.sdk.wisetracker.dox.open.model.XProperties;
 import com.sdk.wisetracker.dox.open.model.XPurchase;
 import com.sdk.wisetracker.base.open.model.User;
 import com.sdk.wisetracker.new_dot.open.DOT;
+import com.sdk.wisetracker.new_dot.tracker.init.ActivityDetector;
+import com.sdk.wisetracker.new_dot.tracker.manager.DotManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +34,25 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+         AppLinkData.fetchDeferredAppLinkData(getApplicationContext(), new AppLinkData.CompletionHandler() {
+            @Override
+            public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
+                // SDK 호출
+                 if (appLinkData == null) {
+                     DOT.receiveFailFacebookReferrer(1);
+                    return ;
+                }
+
+                Bundle bundle = appLinkData.getArgumentBundle();
+                if (bundle == null) {
+                    DOT.receiveFailFacebookReferrer(2);
+                    return;
+                }
+                DOT.setFacebookReferrer(bundle);
+            }
+        });
         setContentView(R.layout.activity_main);
         setData();
     }
@@ -43,7 +68,6 @@ public class MainActivity extends Activity {
     }
 
     private void setData() {
-
         TextView click = findViewById(R.id.dot_click);
         click.setOnClickListener(v -> {
 //            Map<String, Object> clickMap = new HashMap<>();
@@ -146,7 +170,12 @@ public class MainActivity extends Activity {
         TextView campaign = findViewById(R.id.dot_internalCampaign);
         campaign.setOnClickListener(v -> {
 
-            InternalCampaign ic = new InternalCampaign.Builder().setInternalCampaign1("campaign1",3).build();
+            InternalCampaign ic = new InternalCampaign.Builder()
+                    .setInternalCampaign1("campaign1",3)
+                    .setInternalCampaign2("campaign2",3)
+                    .setInternalCampaign3("campaign3",3)
+                    .build();
+
             DOT.setInternalCampaign(ic);
 
             Toast.makeText(this, "Campaign 설정 발생", Toast.LENGTH_SHORT).show();

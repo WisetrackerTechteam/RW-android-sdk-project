@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+apply from: 'onestore_installreferrer.test.upload.gradle'
+//apply from: 'base.release.upload.gradle'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.9'
+    }
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'android.arch.work:work-runtime:1.0.1'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.google.android.gms:play-services-ads-identifier:15.0.0'
+    implementation 'commons-net:commons-net:3.6'
+    api 'com.android.installreferrer:installreferrer:1.0'
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.5'
+    //api 'com.couchbase.lite:couchbase-lite-android:2.6.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+task deleteOldJar(type: Delete) {
+    delete 'release/wisetracker-onestore.jar'
+}
+task exportJar(type: Copy) {
+    from('build/intermediates/intermediate-jars/release/')
+    into('release/')
+    include('classes.jar')
+    rename('classes.jar', 'wisetracker-onestore.jar')
+}
+exportJar.dependsOn(deleteOldJar, build)
+
+/*
+bintray upload command
+- all module upload (base.dot.dox)
+./gradlew clean build base:bintrayUpload build new_dot:bintrayUpload build dox:bintrayUpload
+- only base module upload
+./gradlew clean build base:bintrayUpload
+*/

@@ -1,0 +1,76 @@
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+
+    compileSdkVersion 28
+
+    // account
+    def propsFile = project.rootProject.file('bintray.test.properties')
+    Properties props = new Properties()
+    props.load(new FileInputStream(propsFile))
+    def user = "${props['BINTRAY_USER'].toString()}"
+    def apiKey = "${props['BINTRAY_API_KEY'].toString()}"
+
+    // version
+    def versionPropsFile = project.rootProject.file('bintray.test.version.properties')
+    Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(versionPropsFile))
+
+    def uploadVersion
+    def patch = versionProps['ONESTORE_VERSION_PATCH'].toInteger()
+    def runTasks = gradle.startParameter.taskNames
+    if ('onestore_installreferrer:bintrayUpload' in runTasks) {
+        patch += 1
+    }
+
+    uploadVersion = "0.0.${patch}"
+    versionProps['ONESTORE_VERSION_PATCH'] = patch.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+    logger.info("vesion : ${uploadVersion}")
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionName uploadVersion
+    }
+
+    buildTypes {
+        /*
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-db-rules.pro', 'proguard-etc-rules.pro', 'proguard-gson-rules.pro', 'proguard-okhttp-rules.pro', 'proguard-retrofit-rules.pro', 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-db-rules.pro', 'proguard-etc-rules.pro', 'proguard-gson-rules.pro', 'proguard-okhttp-rules.pro', 'proguard-retrofit-rules.pro', 'proguard-rules.pro'
+        }*/
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-db-rules.pro', 'proguard-etc-rules.pro', 'proguard-gson-rules.pro', 'proguard-okhttp-rules.pro', 'proguard-retrofit-rules.pro', 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-db-rules.pro', 'proguard-etc-rules.pro', 'proguard-gson-rules.pro', 'proguard-okhttp-rules.pro', 'proguard-retrofit-rules.pro', 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    publish {
+        // required
+        bintrayUser = user
+        bintrayKey = apiKey
+        publishVersion = uploadVersion
+        groupId = 'com.sdk.wisetracker.onestore_installreferrer'
+        userOrg = 'wisetracker'
+        artifactId = 'onestore_installreferrer_module_test'
+        // optional
+        website = 'http://www.wisetracker.co.kr'
+        desc = 'http://verification.naver.wisetracker.co.kr/verification/public/guide/sdk'
+        issueTracker = "https://github.com/WisetrackerTechteam/Sdk"
+        dryRun = false
+        override = true
+    }
+
+}

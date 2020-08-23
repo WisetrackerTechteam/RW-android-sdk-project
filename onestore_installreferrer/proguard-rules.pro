@@ -1,0 +1,9 @@
+-keepattributes SourceFile,LineNumberTable
+-keepattributes InnerClasses
+-keep class com.sdk.wisetracker.base.common.base.** { *; }
+-keep class com.sdk.wisetracker.base.common.interceptor.** { *; }
+-keep class com.sdk.wisetracker.base.common.type.** { *; }
+-keep class com.sdk.wisetracker.base.common.util.** { *; }
+-keep class com.sdk.wisetracker.base.model.** { *; }
+-keep class com.sdk.wisetracker.base.model.**$Builder
+-keep class com.sdk.wisetracker.base.tracker.data.result.** { *; }

@@ -10,7 +10,15 @@
         <item name="accessToken"></item>
         <item name="domain_x">http://report.wisetracker.co.kr/</item>
     </string-array>
+
     <string-array name="customKeyList">
         <item name="change_1">advtId#advt_id</item>
     </string-array>
+
+    <!-- facebook id -->
+    <string name="facebook_app_id">1630945480451168</string>
+
+    <!-- facebook AppLinkData 사용 여부  -->
+    <string name="useFacebookAppLinkData">Y</string>
+
 </resources>
