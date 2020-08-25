@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 apply from: 'onestore_installreferrer.test.upload.gradle'
-//apply from: 'base.release.upload.gradle'
+//apply from: 'onestore_installreferrer.release.upload.gradle'
 
 buildscript {
     repositories {

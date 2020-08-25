@@ -72,5 +72,4 @@ android {
         dryRun = false
         override = true
     }
-
 }
