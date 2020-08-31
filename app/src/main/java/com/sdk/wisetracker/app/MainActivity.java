@@ -119,7 +119,7 @@ public class MainActivity extends Activity {
             productMap.put("pnAtr1", "상품속성#1");
             List<Map<String, Object>> productList = new ArrayList<>();
             productList.add(productMap);
-            purchaseMap.put("products", productList);
+            purchaseMap.put("product", productList);
             DOT.logPurchase(purchaseMap);
             //logPurchase();
             Toast.makeText(this, "Purchase 발생", Toast.LENGTH_SHORT).show();
@@ -245,7 +245,7 @@ public class MainActivity extends Activity {
         productMap.put("mvt1", "mvt1");
         List<Map<String, Object>> productList = new ArrayList<>();
         productList.add(productMap);
-        purchaseMap.put("products", productList);
+        purchaseMap.put("product", productList);
         String json = new Gson().toJson(purchaseMap);
         DOT.logPurchase(purchaseMap);
     }
