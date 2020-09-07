@@ -29,7 +29,7 @@ android {
     logger.info("vesion : ${uploadVersion}")
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 28
         versionName uploadVersion
     }
