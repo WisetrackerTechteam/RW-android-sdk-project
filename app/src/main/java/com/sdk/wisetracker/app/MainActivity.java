@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
                 DOT.setFacebookReferrer(bundle);
             }
         });
+        DOT.initialization(this);
         setContentView(R.layout.activity_main);
         setData();
     }
