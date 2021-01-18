@@ -2,9 +2,12 @@ package com.sdk.wisetracker.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.facebook.applinks.AppLinkData;
 import com.google.gson.Gson;
@@ -20,6 +23,7 @@ import com.sdk.wisetracker.dox.open.model.XProduct;
 import com.sdk.wisetracker.dox.open.model.XProperties;
 import com.sdk.wisetracker.dox.open.model.XPurchase;
 import com.sdk.wisetracker.base.open.model.User;
+import com.sdk.wisetracker.inappmessage.InAppMessageBroadcastReceiver;
 import com.sdk.wisetracker.new_dot.open.DOT;
 import com.sdk.wisetracker.new_dot.tracker.init.ActivityDetector;
 import com.sdk.wisetracker.new_dot.tracker.manager.DotManager;
@@ -30,6 +34,10 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends Activity {
+
+
+    // 1. 인엡 메시지 설정
+     private InAppMessageBroadcastReceiver inAppMessageBroadcastReceiver = new InAppMessageBroadcastReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +62,21 @@ public class MainActivity extends Activity {
             }
         });
         DOT.initialization(this);
+
+        // 2. 인엡 메시지 설정
+        LocalBroadcastManager.getInstance(this).registerReceiver(inAppMessageBroadcastReceiver, new IntentFilter("com.sdk.wisetracker.inappmessage.RECEIVE_IN_APP_MESSAGE"));
+
         setContentView(R.layout.activity_main);
         setData();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 3. 인엡 메시지 설정
+         LocalBroadcastManager.getInstance(this).unregisterReceiver(inAppMessageBroadcastReceiver);
     }
 
     @Override
@@ -103,7 +124,7 @@ public class MainActivity extends Activity {
 //            eventMap.put("event", "login");
 //            eventMap.put("loginTp", "facebook");
             Map<String, Object> eventMap = new HashMap<>();
-            eventMap.put("event", "event");
+            eventMap.put("event", "w_view_product");
             eventMap.put("pi","evtlist");
             DOT.logEvent(eventMap);
             Toast.makeText(this, "Conversion 발생", Toast.LENGTH_SHORT).show();
