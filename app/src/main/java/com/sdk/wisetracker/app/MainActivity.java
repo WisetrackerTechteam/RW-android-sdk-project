@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 
 
     // 1. 인엡 메시지 설정
-     private InAppMessageBroadcastReceiver inAppMessageBroadcastReceiver = new InAppMessageBroadcastReceiver();
+     private InAppMessageBroadcastReceiver inAppMessageBroadcastReceiver = new InAppMessageBroadcastReceiver(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +111,7 @@ public class MainActivity extends Activity {
 
 
             Map<String, Object> eventMap = new HashMap<>();
-            eventMap.put("event", "event");
-            eventMap.put("pi","evtlist");
+            eventMap.put("event", "w_login_complete");
             DOT.logEvent(eventMap);
             //logClick();
             Toast.makeText(this, "Click 발생", Toast.LENGTH_SHORT).show();
