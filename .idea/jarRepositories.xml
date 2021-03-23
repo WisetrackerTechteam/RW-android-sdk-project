@@ -71,5 +71,20 @@
       <option name="name" value="$PROJECT_DIR$/../../../../../../../wisetracker/Library/Android/sdk/extras/google/m2repository" />
       <option name="url" value="file:$PROJECT_DIR$/../../../../../../../wisetracker/Library/Android/sdk/extras/google/m2repository" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="/Volumes/SSD/Library/Android/sdk/extras/google/m2repository" />
+      <option name="name" value="/Volumes/SSD/Library/Android/sdk/extras/google/m2repository" />
+      <option name="url" value="file:/Volumes/SSD/Library/Android/sdk/extras/google/m2repository" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="/Volumes/SSD/Library/Android/sdk/extras/m2repository" />
+      <option name="name" value="/Volumes/SSD/Library/Android/sdk/extras/m2repository" />
+      <option name="url" value="file:/Volumes/SSD/Library/Android/sdk/extras/m2repository" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="/Volumes/SSD/Library/Android/sdk/extras/android/m2repository" />
+      <option name="name" value="/Volumes/SSD/Library/Android/sdk/extras/android/m2repository" />
+      <option name="url" value="file:/Volumes/SSD/Library/Android/sdk/extras/android/m2repository" />
+    </remote-repository>
   </component>
 </project>

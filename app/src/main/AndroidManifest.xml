@@ -42,6 +42,8 @@
                 <!-- 딥링크로 진입될 스키마와 호스트 정보 수정 -->
                 <data android:host="wisetracker.co.kr"
                     android:scheme="wisetracker2" />
+                <data android:host="wisetracker.co.kr"
+                    android:scheme="rw" />
             </intent-filter>
 
             <!--<intent-filter>-->
@@ -51,10 +53,8 @@
             <!--android:scheme="http" />-->
             <!--<data-->
             <!--android:host="www.wisetracker.co.kr"-->
-            <!--android:scheme="https" />-->
-
-            <!--<action android:name="android.intent.action.VIEW" />-->
-
+            <!--android:scheme="https" />-
+            <!- <action android:name="android.intent.action.VIEW" />-->
             <!--<category android:name="android.intent.category.DEFAULT" />-->
             <!--<category android:name="android.intent.category.BROWSABLE" />-->
 
