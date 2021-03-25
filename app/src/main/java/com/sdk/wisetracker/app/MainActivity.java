@@ -126,24 +126,18 @@ public class MainActivity extends Activity {
             eventMap.put("event", "w_view_product");
             eventMap.put("pi","evtlist");
             DOT.logEvent(eventMap);
-            Toast.makeText(this, "Conversion 발생", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "view product 발생", Toast.LENGTH_SHORT).show();
         });
 
         TextView purchase = findViewById(R.id.dot_purchase);
         purchase.setOnClickListener(v -> {
-            Map<String, Object> purchaseMap = new HashMap<>();
-            purchaseMap.put("ordNo", "주문번호");
-            purchaseMap.put("curcy", "화폐단위");
-            Map<String, Object> productMap = new HashMap<>();
-            productMap.put("pg1", "상품카테고리(대)");
-            productMap.put("pnc", "상품코드1");
-            productMap.put("pnAtr1", "상품속성#1");
-            List<Map<String, Object>> productList = new ArrayList<>();
-            productList.add(productMap);
-            purchaseMap.put("product", productList);
-            DOT.logPurchase(purchaseMap);
+
+            Map<String, Object> eventMap = new HashMap<>();
+            eventMap.put("event", "w_add_to_cart");
+            eventMap.put("pi","evtlist");
+            DOT.logEvent(eventMap);
             //logPurchase();
-            Toast.makeText(this, "Purchase 발생", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "add_to_cart 발생", Toast.LENGTH_SHORT).show();
         });
 
         TextView page = findViewById(R.id.dot_page);
