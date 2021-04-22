@@ -1,5 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
         google()
@@ -7,20 +6,317 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
+        // classpath 'com.android.tools.build:gradle:4.0.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        // classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.15.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     }
 }
-
 allprojects {
+    apply plugin: 'com.jfrog.artifactory'
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.github.dcendents.android-maven'
+
+    // apply plugin: 'java'
     repositories {
         google()
+        // maven { url 'https://dl.bintray.com/wisetracker/maven' }
         jcenter()
-        maven { url 'https://dl.bintray.com/wisetracker/maven' }
+    }
+}
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
+
+/**
+ * JFrog Configuration
+ ***/
+
+// ############################################################################
+// ############################################################################
+// ############################################################################
+// ############################################################################
+// ############################################################################
+// ############################################################################
+
+// Test
+ext.propsFile = project.rootProject.file('jfrog.test.properties')
+ext.versionPropsFile = project.rootProject.file('jfrog.test.version.properties')
+
+// Release
+// ext.propsFile = project.rootProject.file('jfrog.release.properties')
+// ext.versionPropsFile = project.rootProject.file('jfrog.release.version.properties')
+
+// ############################################################################
+// ############################################################################
+// ############################################################################
+// ############################################################################
+// ############################################################################
+// ############################################################################
+
+// skip this module (in our case, the root module):
+artifactoryPublish.skip = true
+def javaProjects() {
+    subprojects.findAll { new File(it.projectDir, 'src').directory }
+}
+project('base') {
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        publications {
+
+            // version
+            Properties versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+
+            def uploadVersion
+            def patch = versionProps['BASE_VERSION_PATCH'].toInteger()
+            def runTasks = gradle.startParameter.taskNames
+            if ('base:artifactoryPublish' in runTasks) {
+                patch += 1
+            }
+
+            uploadVersion = "1.0.${patch}"
+            versionProps['BASE_VERSION_PATCH'] = patch.toString()
+            versionProps.store(versionPropsFile.newWriter(), null)
+            println(":base:"+uploadVersion )
+            aar(MavenPublication) {
+                groupId = "com.sdk.wisetracker"
+                artifactId = "base_module"
+                version = uploadVersion
+
+                //generate pom nodes for dependencies
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each { dependency ->
+                        if ( dependency.group != "RW-android-sdk-project" && dependency.group != null ) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', dependency.group)
+                            dependencyNode.appendNode('artifactId', dependency.name)
+                            dependencyNode.appendNode('version', dependency.version)
+                        }
+                    }
+                }
+
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact("$buildDir/outputs/aar/base.aar")
+            }
+
+        }
+    }
+    artifactoryPublish {
+        publications(publishing.publications.aar)
+    }
+}
+project('new_dot') {
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        publications {
+
+            // version
+            Properties versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+
+            def uploadVersion
+            def patch = versionProps['NEW_DOT_VERSION_PATCH'].toInteger()
+            def runTasks = gradle.startParameter.taskNames
+            if ('new_dot:artifactoryPublish' in runTasks) {
+                patch += 1
+            }
+            uploadVersion = "1.0.${patch}"
+            versionProps['NEW_DOT_VERSION_PATCH'] = patch.toString()
+            versionProps.store(versionPropsFile.newWriter(), null)
+            println(":new_dot:"+ uploadVersion )
+            aar(MavenPublication) {
+                groupId = "com.sdk.wisetracker"
+                artifactId = "new_dot_module"
+                version = uploadVersion
+
+                //generate pom nodes for dependencies
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each { dependency ->
+                        if ( dependency.group != "RW-android-sdk-project" && dependency.group != null ) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', dependency.group)
+                            dependencyNode.appendNode('artifactId', dependency.name)
+                            dependencyNode.appendNode('version', dependency.version)
+                        }
+                    }
+                }
+
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact("$buildDir/outputs/aar/new_dot.aar")
+            }
+        }
+    }
+    artifactoryPublish {
+        publications(publishing.publications.aar)
+    }
+}
+project('dox') {
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        publications {
+            // version
+            Properties versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+
+            def uploadVersion
+            def patch = versionProps['DOX_VERSION_PATCH'].toInteger()
+            def runTasks = gradle.startParameter.taskNames
+            if ('dox:artifactoryPublish' in runTasks) {
+                patch += 1
+            }
+            uploadVersion = "1.0.${patch}"
+            versionProps['DOX_VERSION_PATCH'] = patch.toString()
+            versionProps.store(versionPropsFile.newWriter(), null)
+            println(":dox:"+ uploadVersion )
+            aar(MavenPublication) {
+                groupId = "com.sdk.wisetracker"
+                artifactId = "dox_module"
+                version = uploadVersion
+
+                //generate pom nodes for dependencies
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each { dependency ->
+                        if ( dependency.group != "RW-android-sdk-project" && dependency.group != null ) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', dependency.group)
+                            dependencyNode.appendNode('artifactId', dependency.name)
+                            dependencyNode.appendNode('version', dependency.version)
+                        }
+                    }
+                }
+
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact("$buildDir/outputs/aar/dox.aar")
+            }
+        }
+    }
+    artifactoryPublish {
+        publications(publishing.publications.aar)
+    }
+}
+project('onestore_installreferrer') {
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        publications {
+            // version
+            Properties versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+
+            def uploadVersion
+            def patch = versionProps['ONESTORE_VERSION_PATCH'].toInteger()
+            def runTasks = gradle.startParameter.taskNames
+            if ('onestore_installreferrer:artifactoryPublish' in runTasks) {
+                patch += 1
+            }
+            uploadVersion = "1.0.${patch}"
+            versionProps['ONESTORE_VERSION_PATCH'] = patch.toString()
+            versionProps.store(versionPropsFile.newWriter(), null)
+            println(":onestore_installreferrer:"+ uploadVersion )
+            aar(MavenPublication) {
+                groupId = "com.sdk.wisetracker"
+                artifactId = "onestore_installreferrer"
+                version = uploadVersion
+
+                //generate pom nodes for dependencies
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each { dependency ->
+                        if ( dependency.group != "RW-android-sdk-project" && dependency.group != null ) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', dependency.group)
+                            dependencyNode.appendNode('artifactId', dependency.name)
+                            dependencyNode.appendNode('version', dependency.version)
+                        }
+                    }
+                }
+
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact("$buildDir/outputs/aar/onestore_installreferrer.aar")
+            }
+        }
+    }
+    artifactoryPublish {
+        publications(publishing.publications.aar)
+    }
+}
+project('inappmessage') {
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        publications {
+            // version
+            Properties versionProps = new Properties()
+            versionProps.load(new FileInputStream(versionPropsFile))
+
+            def uploadVersion
+            def patch = versionProps['INAPPMESSAGE_VERSION_PATCH'].toInteger()
+            def runTasks = gradle.startParameter.taskNames
+            if ('inappmessage:artifactoryPublish' in runTasks) {
+                patch += 1
+            }
+            uploadVersion = "0.0.${patch}"
+            versionProps['INAPPMESSAGE_VERSION_PATCH'] = patch.toString()
+            versionProps.store(versionPropsFile.newWriter(), null)
+            println(":inappmessage:"+  uploadVersion )
+            aar(MavenPublication) {
+                groupId = "com.sdk.wisetracker"
+                artifactId = "inappmessage_module"
+                version = uploadVersion
+
+                //generate pom nodes for dependencies
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each { dependency ->
+                        if ( dependency.group != "RW-android-sdk-project" && dependency.group != null ) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', dependency.group)
+                            dependencyNode.appendNode('artifactId', dependency.name)
+                            dependencyNode.appendNode('version', dependency.version)
+                        }
+                    }
+                }
+
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact("$buildDir/outputs/aar/inappmessage.aar")
+            }
+        }
+    }
+    artifactoryPublish {
+        publications(publishing.publications.aar)
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+
+Properties props = new Properties()
+props.load(new FileInputStream(propsFile))
+def user = "${props['JFROG_USER'].toString()}"
+def pwd = "${props['JFROG_PWD'].toString()}"
+def deployName = "${props['JFROG_REPOSITORY'].toString()}"
+artifactory {
+    contextUrl = 'https://wisetracker.jfrog.io/artifactory'
+    clientConfig.setIncludeEnvVars(true)
+    clientConfig.info.addEnvironmentProperty('test.adding.dynVar',new java.util.Date().toString())
+    publish {
+        repository {
+            repoKey = deployName // The Artifactory repository key to publish to
+            username = user // The publisher user name
+            password = pwd  // The publisher password
+        }
+        defaults {
+            publications ('ivyJava','mavenJava','foo')
+
+            // Reference to Gradle publications defined in the build script.
+            // This is how we tell the Artifactory Plugin which artifacts should be
+            // published to Artifactory.
+            publishArtifacts = true
+            // Properties to be attached to the published artifacts.
+            properties = ['qa.level': 'basic', 'dev.team' : 'core']
+            publishPom = true // Publish generated POM files to Artifactory (true by default)
+        }
+    }
 }
- 
