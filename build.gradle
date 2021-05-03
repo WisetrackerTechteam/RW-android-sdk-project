@@ -42,12 +42,12 @@ allprojects {
 // ############################################################################
 
 // Test
-ext.propsFile = project.rootProject.file('jfrog.test.properties')
-ext.versionPropsFile = project.rootProject.file('jfrog.test.version.properties')
+//ext.propsFile = project.rootProject.file('jfrog.test.properties')
+//ext.versionPropsFile = project.rootProject.file('jfrog.test.version.properties')
 
 // Release
-// ext.propsFile = project.rootProject.file('jfrog.release.properties')
-// ext.versionPropsFile = project.rootProject.file('jfrog.release.version.properties')
+ext.propsFile = project.rootProject.file('jfrog.release.properties')
+ext.versionPropsFile = project.rootProject.file('jfrog.release.version.properties')
 
 // ############################################################################
 // ############################################################################
@@ -72,6 +72,7 @@ project('base') {
 
             def uploadVersion
             def patch = versionProps['BASE_VERSION_PATCH'].toInteger()
+            def patchOneStore = versionProps['ONESTORE_VERSION_PATCH'].toInteger()
             def runTasks = gradle.startParameter.taskNames
             if ('base:artifactoryPublish' in runTasks) {
                 patch += 1
@@ -90,15 +91,21 @@ project('base') {
                 pom.withXml {
                     def dependenciesNode = asNode().appendNode('dependencies')
                     configurations.implementation.allDependencies.each { dependency ->
-                        if ( dependency.group != "RW-android-sdk-project" && dependency.group != null ) {
+                        if ( dependency.group != "RW-android-sdk-project" &&
+                             dependency.group != "RW-android-sdk" &&
+                             dependency.group != null ) {
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             dependencyNode.appendNode('groupId', dependency.group)
                             dependencyNode.appendNode('artifactId', dependency.name)
                             dependencyNode.appendNode('version', dependency.version)
                         }
                     }
+                    /** onestore **/
+                    def dependencyNodeOneStore = dependenciesNode.appendNode('dependency')
+                    dependencyNodeOneStore.appendNode('groupId', "com.sdk.wisetracker")
+                    dependencyNodeOneStore.appendNode('artifactId', "onestore_installreferrer")
+                    dependencyNodeOneStore.appendNode('version', "1.0."+patchOneStore);
                 }
-
                 // Tell maven to prepare the generated "*.aar" file for publishing
                 artifact("$buildDir/outputs/aar/base.aar")
             }
