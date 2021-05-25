@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sdk.wisetracker.base.tracker.common.log.WiseLog;
 import com.sdk.wisetracker.new_dot.open.DOT;
 
 import java.util.Set;

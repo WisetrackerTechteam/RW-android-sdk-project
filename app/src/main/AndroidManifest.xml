@@ -34,16 +34,35 @@
         <activity android:name=".WebViewActivity" />
 
 
-        <activity android:name=".LinkActivity" android:launchMode="singleTop">
+        <activity
+            android:name=".LinkActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- 딥링크로 진입될 스키마와 호스트 정보 수정 -->
-                <data android:host="wisetracker.co.kr"
+                <data
+                    android:host="wisetracker.co.kr"
                     android:scheme="wisetracker2" />
-                <data android:host="wisetracker.co.kr"
+                <data
+                    android:host="wisetracker.co.kr"
                     android:scheme="rw" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- 딥링크로 진입될 스키마와 호스트 정보 수정 -->
+                <data
+                    android:scheme="https"
+                    android:host="app.wisetracker.co.kr"
+                    android:pathPattern="/ul/102/" />
+
             </intent-filter>
 
             <!--<intent-filter>-->
@@ -90,7 +109,9 @@
         -->
 
         <!-- facebook app id -->
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
     </application>
 

@@ -1,19 +1,34 @@
 package com.sdk.wisetracker.app;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
+import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.facebook.applinks.AppLinkData;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.sdk.wisetracker.app.service.BasicDataTest;
 import com.sdk.wisetracker.base.open.model.InternalCampaign;
 import com.sdk.wisetracker.base.tracker.common.log.WiseLog;
+import com.sdk.wisetracker.base.tracker.data.manager.BasicData;
 import com.sdk.wisetracker.base.tracker.data.model.Const;
 import com.sdk.wisetracker.dox.open.api.DOX;
 import com.sdk.wisetracker.dox.open.model.XConversion;
@@ -36,15 +51,29 @@ import java.util.Map;
 public class MainActivity extends Activity {
 
 
-    // 1. 인엡 메시지 설정
-     private InAppMessageBroadcastReceiver inAppMessageBroadcastReceiver = new InAppMessageBroadcastReceiver(this);
+//    // 1. 인엡 메시지 설정
+//     private InAppMessageBroadcastReceiver inAppMessageBroadcastReceiver = new InAppMessageBroadcastReceiver(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("WiseLog", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Log.w("WiseLog", "Fcm :::: "+token);
+                    }
+                });
 
-         AppLinkData.fetchDeferredAppLinkData(getApplicationContext(), new AppLinkData.CompletionHandler() {
+
+        AppLinkData.fetchDeferredAppLinkData(getApplicationContext(), new AppLinkData.CompletionHandler() {
             @Override
             public void onDeferredAppLinkDataFetched(AppLinkData appLinkData) {
                 // SDK 호출
@@ -61,10 +90,16 @@ public class MainActivity extends Activity {
                 DOT.setFacebookReferrer(bundle);
             }
         });
+         if( savedInstanceState != null ){
+             WiseLog.d("================== onCreate =========================");
+             WiseLog.d(savedInstanceState.toString());
+             WiseLog.d("===========================================");
+         }
+
         DOT.initialization(this);
 
-        // 2. 인엡 메시지 설정
-        LocalBroadcastManager.getInstance(this).registerReceiver(inAppMessageBroadcastReceiver, new IntentFilter("com.sdk.wisetracker.inappmessage.RECEIVE_IN_APP_MESSAGE"));
+//        // 2. 인엡 메시지 설정
+//        LocalBroadcastManager.getInstance(this).registerReceiver(inAppMessageBroadcastReceiver, new IntentFilter("com.sdk.wisetracker.inappmessage.RECEIVE_IN_APP_MESSAGE"));
 
         setContentView(R.layout.activity_main);
         setData();
@@ -75,8 +110,8 @@ public class MainActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
 
-        // 3. 인엡 메시지 설정
-         LocalBroadcastManager.getInstance(this).unregisterReceiver(inAppMessageBroadcastReceiver);
+//        // 3. 인엡 메시지 설정
+//         LocalBroadcastManager.getInstance(this).unregisterReceiver(inAppMessageBroadcastReceiver);
     }
 
     @Override
@@ -196,9 +231,62 @@ public class MainActivity extends Activity {
             Toast.makeText(this, "Campaign 설정 발생", Toast.LENGTH_SHORT).show();
         });
 
+        TextView localNotification = findViewById(R.id.dot_localNotification);
+        localNotification.setOnClickListener(v -> {
+            NotificationSomethings();
+            Toast.makeText(this, "Local Notification 발생", Toast.LENGTH_SHORT).show();
+        });
+    }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        WiseLog.d("================== onNewIntent =========================");
+        WiseLog.d(intent.toString());
+        WiseLog.d("===========================================");
+     }
+
+    public static final String NOTIFICATION_CHANNEL_ID = "10001";
+    public void NotificationSomethings() {
+        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.putExtra("notificationId", 1); //전달할 값
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK) ;
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,  PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_foreground)) //BitMap 이미지 요구
+                .setContentTitle("Wisetracker Local Notification")
+                .setContentText("Test")
+                // 더 많은 내용이라서 일부만 보여줘야 하는 경우 아래 주석을 제거하면 setContentText에 있는 문자열 대신 아래 문자열을 보여줌
+                //.setStyle(new NotificationCompat.BigTextStyle().bigText("더 많은 내용을 보여줘야 하는 경우..."))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent) // 사용자가 노티피케이션을 탭시 ResultActivity로 이동하도록 설정
+                .setAutoCancel(true);
+
+        //OREO API 26 이상에서는 채널 필요
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            builder.setSmallIcon(R.drawable.ic_launcher_foreground); //mipmap 사용시 Oreo 이상에서 시스템 UI 에러남
+            CharSequence channelName  = "노티페케이션 채널";
+            String description = "오레오 이상을 위한 것임";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName , importance);
+            channel.setDescription(description);
+
+            // 노티피케이션 채널을 시스템에 등록
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(channel);
+
+        }else builder.setSmallIcon(R.mipmap.ic_launcher); // Oreo 이하에서 mipmap 사용하지 않으면 Couldn't create icon: StatusBarIcon 에러남
+
+        assert notificationManager != null;
+        notificationManager.notify(1234, builder.build()); // 고유숫자로 노티피케이션 동작시킴
 
     }
+
 
     private void logEvent() {
         Map<String, Object> event = new HashMap<>();

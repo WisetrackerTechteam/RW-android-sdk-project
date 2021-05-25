@@ -1,18 +1,57 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
-apply from: 'onestore_installreferrer.test.upload.gradle'
-//apply from: 'onestore_installreferrer.release.upload.gradle'
-
+//apply plugin: 'com.novoda.bintray-release'
+//apply from: 'onestore_installreferrer.test.upload.gradle'
+////apply from: 'onestore_installreferrer.release.upload.gradle'
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.novoda:bintray-release:0.9'
+        // classpath 'com.novoda:bintray-release:0.9'
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.15.2'
     }
 }
+android {
 
+    compileSdkVersion 28
 
+    // version
+    Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(project.property('versionPropsFile')))
+
+    def uploadVersion
+    def patch = versionProps['ONESTORE_VERSION_PATCH'].toInteger()
+    uploadVersion = "1.0.${patch}"
+    println( uploadVersion )
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionName uploadVersion
+    }
+
+    buildTypes {
+        /*
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-db-rules.pro', 'proguard-etc-rules.pro', 'proguard-gson-rules.pro', 'proguard-okhttp-rules.pro', 'proguard-retrofit-rules.pro', 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-db-rules.pro', 'proguard-etc-rules.pro', 'proguard-gson-rules.pro', 'proguard-okhttp-rules.pro', 'proguard-retrofit-rules.pro', 'proguard-rules.pro'
+        }*/
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-db-rules.pro', 'proguard-etc-rules.pro', 'proguard-gson-rules.pro', 'proguard-okhttp-rules.pro', 'proguard-retrofit-rules.pro', 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-db-rules.pro', 'proguard-etc-rules.pro', 'proguard-gson-rules.pro', 'proguard-okhttp-rules.pro', 'proguard-retrofit-rules.pro', 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.work:work-runtime:2.0.1'
@@ -40,6 +79,7 @@ task exportJar(type: Copy) {
     rename('classes.jar', 'wisetracker-onestore.jar')
 }
 exportJar.dependsOn(deleteOldJar, build)
+
 
 /*
 bintray upload command

@@ -10,12 +10,14 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         // classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+        classpath 'com.google.gms:google-services:4.3.3'  // Google Services plugin
         classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.15.2'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     }
 }
 allprojects {
     apply plugin: 'com.jfrog.artifactory'
+
     apply plugin: 'maven-publish'
     apply plugin: 'com.github.dcendents.android-maven'
 
@@ -42,12 +44,12 @@ allprojects {
 // ############################################################################
 
 // Test
-//ext.propsFile = project.rootProject.file('jfrog.test.properties')
-//ext.versionPropsFile = project.rootProject.file('jfrog.test.version.properties')
+ext.propsFile = project.rootProject.file('jfrog.test.properties')
+ext.versionPropsFile = project.rootProject.file('jfrog.test.version.properties')
 
 // Release
-ext.propsFile = project.rootProject.file('jfrog.release.properties')
-ext.versionPropsFile = project.rootProject.file('jfrog.release.version.properties')
+// ext.propsFile = project.rootProject.file('jfrog.release.properties')
+// ext.versionPropsFile = project.rootProject.file('jfrog.release.version.properties')
 
 // ############################################################################
 // ############################################################################
