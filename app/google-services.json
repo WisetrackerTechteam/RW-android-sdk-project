@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "383775229084",
+    "project_id": "rw-sdk-test",
+    "storage_bucket": "rw-sdk-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383775229084:android:e3e8eb1b00ffe0042f5959",
+        "android_client_info": {
+          "package_name": "com.sdk.wisetracker.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383775229084-146o94puo4sl9pd67p908ishq3ihdvpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2PWTSlao0gh7fgcPDEsUaSMNsuwod3AU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383775229084-146o94puo4sl9pd67p908ishq3ihdvpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
